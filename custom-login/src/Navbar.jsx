@@ -13,7 +13,7 @@
 import { useOktaAuth } from '@okta/okta-react';
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Container, Icon, Image, Menu } from 'semantic-ui-react';
+import { Container, Image, Menu } from 'semantic-ui-react';
 
 const Navbar = ({ setCorsErrorModalOpen }) => {
   const history = useHistory();
@@ -46,16 +46,16 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
       <Menu fixed="top" inverted>
         <Container>
           <Menu.Item header>
-            <Image size="mini" src={`${process.env.PUBLIC_URL}/react.svg`} />
+            <Image size="mini" src={`${process.env.PUBLIC_URL}/bank-logo.png`} />
             &nbsp;
-            <Link to="/">Okta-React Sample Project</Link>
+            <Link to="/">Iron Bank</Link>
           </Menu.Item>
-          {authState.isAuthenticated && (
+          {/* {authState.isAuthenticated && (
           <Menu.Item id="messages-button">
             <Icon name="mail outline" />
             <Link to="/messages">Messages</Link>
           </Menu.Item>
-          )}
+          )} */}
           {authState.isAuthenticated && (
             <Menu.Item id="profile-button">
               <Link to="/profile">Profile</Link>

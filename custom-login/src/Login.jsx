@@ -36,10 +36,10 @@ const Login = ({ setCorsErrorModalOpen }) => {
       baseUrl: issuer.split('/oauth2')[0],
       clientId,
       redirectUri,
-      logo: `${process.env.PUBLIC_URL}/react.svg`,
+      logo: `${process.env.PUBLIC_URL}/bank-logo.png`,
       i18n: {
         en: {
-          'primaryauth.title': 'Sign in to React & Company',
+          'primaryauth.title': 'Sign in to the Iron Bank',
         },
       },
       authParams: {

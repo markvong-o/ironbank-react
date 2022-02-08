@@ -9,7 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
+/*eslint-disable*/
 import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -25,11 +25,14 @@ const Home = () => {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);
     } else {
-      oktaAuth.getUser().then((info) => {
-        setUserInfo(info);
-      }).catch((err) => {
-        console.error(err);
-      });
+      oktaAuth
+        .getUser()
+        .then((info) => {
+          setUserInfo(info);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }, [authState, oktaAuth]); // Update if authState changes
 
@@ -53,28 +56,29 @@ const Home = () => {
   ];
 
   if (!authState) {
-    return (
-      <div>Loading...</div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
     <div id="home">
       <div>
-        <Header as="h1">PKCE Flow w/ Custom Login Page</Header>
+        <Header as="h1">Welcome to the Iron Bank</Header>
 
-        { authState.isAuthenticated && !userInfo
-        && <div>Loading user information...</div>}
+        {authState.isAuthenticated && !userInfo && (
+          <div>Loading user information...</div>
+        )}
 
-        {authState.isAuthenticated && userInfo
-        && (
-        <div>
-          <p id="welcome">
-            Welcome, &nbsp;
-            {userInfo.name}
-            !
-          </p>
-          <p>
+        {authState.isAuthenticated && userInfo && (
+          <div>
+            <p id="welcome">
+              Welcome, &nbsp;
+              {userInfo.name}!
+            </p>
+            <p>
+              You've successfully authenticated. Currently, you're able to see
+              your profile and the applications you have access to.
+            </p>
+            {/* <p>
             You have successfully authenticated against your Okta org, and have been redirected back to this application.  You now have an ID token and access token in local storage.
             Visit the
             {' '}
@@ -94,14 +98,14 @@ const Home = () => {
             <a href="/messages">My Messages</a>
             {' '}
             page to see the authentication process in action.
-          </p>
-        </div>
+          </p> */}
+          </div>
         )}
 
-        {!authState.isAuthenticated
-        && (
-        <div>
-          <p>If you&lsquo;re viewing this page then you have successfully started this React application.</p>
+        {!authState.isAuthenticated && (
+          <div>
+            <p>Login to view your profile.</p>
+            {/* <p>If you&lsquo;re viewing this page then you have successfully started this React application.</p>
           <p>
             <span>This example shows you how to use the </span>
             <a href="https://github.com/okta/okta-react/tree/master">Okta React Library</a>
@@ -112,11 +116,12 @@ const Home = () => {
           <p>
             When you click the login button below, you will be presented the login page on the Okta Sign-In Widget hosted within the application.
             After you authenticate, you will be logged in to this application with an ID token and access token. These tokens will be stored in local storage and can be retrieved at a later time.
-          </p>
-          <Button id="login-button" primary onClick={login}>Login</Button>
-        </div>
+          </p> */}
+            <Button id="login-button" primary onClick={login}>
+              Login
+            </Button>
+          </div>
         )}
-
       </div>
     </div>
   );
