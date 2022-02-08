@@ -52,7 +52,7 @@ const Login = ({ setCorsErrorModalOpen }) => {
         idpDiscovery: true
       },
       idpDiscovery: {
-        requestContext: "http://localhost:8080"
+        requestContext: window.location.origin
       }
     });
 
