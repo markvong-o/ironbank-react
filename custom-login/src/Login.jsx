@@ -9,7 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
+/*eslint-disable*/
 import React, { useEffect, useRef } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
 import * as OktaSignIn from '@okta/okta-signin-widget';
@@ -48,6 +48,12 @@ const Login = ({ setCorsErrorModalOpen }) => {
         scopes,
       },
       useInteractionCodeFlow: useInteractionCode, // Set to true, if your org is OIE enabled
+      features:{
+        idpDiscovery: true
+      },
+      idpDiscovery: {
+        requestContext: "http://localhost:8080"
+      }
     });
 
     widget.renderEl(

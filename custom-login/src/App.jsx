@@ -9,7 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
+/*eslint-disable*/
 import React from 'react';
 import { Route, useHistory, Switch } from 'react-router-dom';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
@@ -29,7 +29,8 @@ const oktaAuth = new OktaAuth(config.oidc);
 
 const App = () => {
   const [corsErrorModalOpen, setCorsErrorModalOpen] = React.useState(false);
-  const [authRequiredModalOpen, setAuthRequiredModalOpen] = React.useState(false);
+  const [authRequiredModalOpen, setAuthRequiredModalOpen] =
+    React.useState(false);
 
   const history = useHistory(); // example from react-router
 
@@ -42,6 +43,17 @@ const App = () => {
     history.replace(toRelativeUrl(originalUri || '/', window.location.origin));
   };
 
+  // Check if Okta session exists, set tokens if it does
+  oktaAuth.session
+    .exists()
+    .then(async (exists) => {
+      if (exists) {
+        const res = await oktaAuth.token.getWithoutPrompt();
+        oktaAuth.tokenManager.setTokens(res.tokens);
+      }
+    })
+    .catch((err) => console.log(err));
+
   const customAuthHandler = async () => {
     const previousAuthState = oktaAuth.authStateManager.getPreviousAuthState();
     if (!previousAuthState || !previousAuthState.isAuthenticated) {
@@ -52,7 +64,7 @@ const App = () => {
       setAuthRequiredModalOpen(true);
     }
   };
-  
+
   const onAuthResume = async () => {
     history.push('/login');
   };
@@ -65,12 +77,24 @@ const App = () => {
     >
       <Navbar {...{ setCorsErrorModalOpen }} />
       <CorsErrorModal {...{ corsErrorModalOpen, setCorsErrorModalOpen }} />
-      <AuthRequiredModal {...{ authRequiredModalOpen, setAuthRequiredModalOpen, triggerLogin }} />
+      <AuthRequiredModal
+        {...{ authRequiredModalOpen, setAuthRequiredModalOpen, triggerLogin }}
+      />
       <Container text style={{ marginTop: '7em' }}>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/login/callback" render={(props) => <LoginCallback {...props} onAuthResume={onAuthResume} />} />
-          <Route path="/login" render={() => <CustomLoginComponent {...{ setCorsErrorModalOpen }} />} />
+          <Route
+            path="/login/callback"
+            render={(props) => (
+              <LoginCallback {...props} onAuthResume={onAuthResume} />
+            )}
+          />
+          <Route
+            path="/login"
+            render={() => (
+              <CustomLoginComponent {...{ setCorsErrorModalOpen }} />
+            )}
+          />
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
           <SecureRoute path="/apps" component={Applications} />
