@@ -78,7 +78,7 @@ const Applications = () => {
     <div>
       <div>
         <Header as="h1">
-          <Icon name="drivers license" /> My Applications{' '}
+          <Icon name="medapps" /> My Applications{' '}
         </Header>
         <p>Below are the applications you have access to.</p>
 
