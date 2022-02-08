@@ -21,6 +21,7 @@ import CustomLoginComponent from './Login';
 import Messages from './Messages';
 import Navbar from './Navbar';
 import Profile from './Profile';
+import Applications from './Applications';
 import CorsErrorModal from './CorsErrorModal';
 import AuthRequiredModal from './AuthRequiredModal';
 
@@ -72,6 +73,7 @@ const App = () => {
           <Route path="/login" render={() => <CustomLoginComponent {...{ setCorsErrorModalOpen }} />} />
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
+          <SecureRoute path="/apps" component={Applications} />
         </Switch>
       </Container>
     </Security>

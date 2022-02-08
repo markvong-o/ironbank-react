@@ -62,6 +62,11 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
             </Menu.Item>
           )}
           {authState.isAuthenticated && (
+            <Menu.Item id="apps-button">
+              <Link to="/apps">Applications</Link>
+            </Menu.Item>
+          )}
+          {authState.isAuthenticated && (
             <Menu.Item id="logout-button" onClick={logout}>Logout</Menu.Item>
           )}
           {!authState.isPending && !authState.isAuthenticated && (
