@@ -22,9 +22,10 @@ import Messages from './Messages';
 import Navbar from './Navbar';
 import Profile from './views/Profile';
 import Applications from './views/Applications';
-import Api from "./views/Api";
+import Api from './views/Api';
 import CorsErrorModal from './CorsErrorModal';
 import AuthRequiredModal from './AuthRequiredModal';
+import "./App.css";
 
 const oktaAuth = new OktaAuth(config.oidc);
 
@@ -81,7 +82,7 @@ const App = () => {
       <AuthRequiredModal
         {...{ authRequiredModalOpen, setAuthRequiredModalOpen, triggerLogin }}
       />
-      <Container text style={{ marginTop: '7em' }}>
+      <Container text id="main-container">
         <Switch>
           <Route path="/" exact component={Home} />
           <Route
@@ -90,12 +91,12 @@ const App = () => {
               <LoginCallback {...props} onAuthResume={onAuthResume} />
             )}
           />
-          <Route
+          {/* <Route
             path="/login"
             render={() => (
               <CustomLoginComponent {...{ setCorsErrorModalOpen }} />
             )}
-          />
+          /> */}
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
           <SecureRoute path="/apps" component={Applications} />

@@ -1,0 +1,72 @@
+textarea, pre {
+  width: 600px;
+  text-overflow: wrap;
+  height: 300px;
+  padding: 10px;
+  resize: none;
+  background-color: black;
+  color: yellow;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  height: max-content;
+  margin: 0;
+}
+
+textarea {
+    height: 350px;
+}
+
+button {
+  background-color: transparent;
+  font-weight: bold;
+  width: max-content;
+  margin-top: 0.5rem;
+}
+button:hover {
+  background-color: black;
+  color: yellow;
+}
+
+#main-container{
+    padding:0;
+    margin:0;
+    /* border: 1px green solid; */
+    /* width: 100%; */
+}
+
+#internal-container {
+    padding:0;
+    margin:0;
+}
+
+#main-token-container {
+    margin: 0;
+    display: flex;
+    width: 100%;
+    flex-wrap:wrap;
+}
+
+.data-container {
+    display:flex;
+    flex-direction: column;
+    /* border: 1px red solid; */
+    margin: 1rem;
+}
+
+#api-container {
+    width: 100%;
+    margin: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 5px;
+}
+
+.method {
+    font-weight: bold;
+}
+
+.error {
+    margin-top: 15rem;
+}

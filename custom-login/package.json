@@ -23,18 +23,18 @@
     "lint": "eslint -c .eslintrc.json --ext .js --ext .jsx src/"
   },
   "devDependencies": {
-    "h": "1.0.0",
-    "react-app-rewired": "2.1.12",
-    "source-map-loader": "1.1.3",
+    "cross-env": "7.0.3",
+    "dotenv": "8.6.0",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
-    "cross-env": "7.0.3",
+    "h": "1.0.0",
     "jest-watch-typeahead": "0.6.5",
-    "dotenv": "8.6.0"
+    "react-app-rewired": "2.1.12",
+    "source-map-loader": "1.1.3"
   },
   "browserslist": {
     "production": [
