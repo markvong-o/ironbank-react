@@ -68,7 +68,7 @@ const App = () => {
   };
 
   const onAuthResume = async () => {
-    history.push('/login');
+    history.push('/');
   };
 
   return (
@@ -88,7 +88,7 @@ const App = () => {
           <Route
             path="/login/callback"
             render={(props) => (
-              <LoginCallback {...props} onAuthResume={onAuthResume} />
+              <LoginCallback />
             )}
           />
           {/* <Route
