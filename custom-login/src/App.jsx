@@ -85,12 +85,13 @@ const App = () => {
       <Container text id="main-container">
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route
+          <Route path="/login/callback" component={LoginCallback} />
+          {/* <Route
             path="/login/callback"
             render={(props) => (
               <LoginCallback />
             )}
-          />
+          /> */}
           {/* <Route
             path="/login"
             render={() => (
