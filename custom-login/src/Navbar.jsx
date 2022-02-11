@@ -78,7 +78,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
             )}
             {authState.isAuthenticated && (
               <Menu.Item id="api-button">
-                <Link to="/api">API Center</Link>
+                <Link to="/balance">Check Balance</Link>
               </Menu.Item>
             )}
             {authState.isAuthenticated && (

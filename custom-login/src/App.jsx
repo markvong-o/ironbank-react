@@ -100,7 +100,7 @@ const App = () => {
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
           <SecureRoute path="/apps" component={Applications} />
-          <SecureRoute path="/api" component={Api} />
+          <SecureRoute path="/balance" component={Api} />
         </Switch>
       </Container>
     </Security>
