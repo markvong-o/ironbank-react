@@ -68,7 +68,7 @@ const Api = () => {
         if (res.status === 200) {
           resJson = await res.json();
         } else {
-          setResponse({ status: res.status, Error: 'Unauthorized access.' });
+          setResponse({ status: res.status, error: 'Unauthorized access.' });
         }
       } catch (err) {
         console.log(err);
