@@ -15,7 +15,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { Header, Icon, Table } from 'semantic-ui-react';
 import { getTokenSourceMapRange } from 'typescript';
-import './Applications.css';
+import '../css/Applications.css';
 
 const Applications = () => {
   const { authState, oktaAuth } = useOktaAuth();
@@ -66,7 +66,7 @@ const Applications = () => {
     }
   }, [authState, oktaAuth]); // Update if authState changes
 
-  if (!userInfo) {
+  if (apps.length === 0) {
     return (
       <div>
         <p>Fetching applications...</p>
@@ -78,7 +78,7 @@ const Applications = () => {
     <div>
       <div>
         <Header as="h1">
-          <Icon name="medapps" /> My Applications{' '}
+          <Icon name="medapps" color="teal" /> My Applications{' '}
         </Header>
         <p>Below are the applications you have access to.</p>
 

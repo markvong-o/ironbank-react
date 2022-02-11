@@ -15,7 +15,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import * as OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
-import config from './config';
+import config from '../config';
 
 const Login = ({ setCorsErrorModalOpen }) => {
   const { oktaAuth } = useOktaAuth();

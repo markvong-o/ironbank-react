@@ -43,7 +43,7 @@ const Profile = () => {
     <div>
       <div>
         <Header as="h1">
-          <Icon name="drivers license" />
+          <Icon name="drivers license" color="blue" />
           {' '}
           My User Profile (ID Token Claims)
           {' '}

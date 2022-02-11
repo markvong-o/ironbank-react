@@ -9,7 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
+/*eslint-disable*/
 import { useOktaAuth } from '@okta/okta-react';
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
@@ -20,12 +20,18 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   const { authState, oktaAuth } = useOktaAuth();
 
   // Note: Can't distinguish CORS error from other network errors
-  const isCorsError = (err) => (err.name === 'AuthApiError' && !err.errorCode && err.xhr.message === 'Failed to fetch');
+  const isCorsError = (err) =>
+    err.name === 'AuthApiError' &&
+    !err.errorCode &&
+    err.xhr.message === 'Failed to fetch';
 
-  const login = async () => history.push('/login');
+  const login = async () => {
+    oktaAuth.signInWithRedirect({ originalUri: '/' });
+  };
 
   const logout = async () => {
-    const basename = window.location.origin + history.createHref({ pathname: '/' });
+    const basename =
+      window.location.origin + history.createHref({ pathname: '/' });
     try {
       await oktaAuth.signOut({ postLogoutRedirectUri: basename });
     } catch (err) {
@@ -44,34 +50,46 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   return (
     <div>
       <Menu fixed="top" inverted>
-        <Container>
+        <Container
+          style={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'space-between',
+          }}
+        >
           <Menu.Item header>
-            <Image size="mini" src={`${process.env.PUBLIC_URL}/bank-logo.png`} />
+            <Image
+              size="mini"
+              src={`${process.env.PUBLIC_URL}/bank-logo.png`}
+            />
             &nbsp;
             <Link to="/">Iron Bank</Link>
           </Menu.Item>
-          {/* {authState.isAuthenticated && (
-          <Menu.Item id="messages-button">
-            <Icon name="mail outline" />
-            <Link to="/messages">Messages</Link>
-          </Menu.Item>
-          )} */}
-          {authState.isAuthenticated && (
-            <Menu.Item id="profile-button">
-              <Link to="/profile">Profile</Link>
-            </Menu.Item>
-          )}
-          {authState.isAuthenticated && (
-            <Menu.Item id="apps-button">
-              <Link to="/apps">Applications</Link>
-            </Menu.Item>
-          )}
-          {authState.isAuthenticated && (
-            <Menu.Item id="logout-button" onClick={logout}>Logout</Menu.Item>
-          )}
-          {!authState.isPending && !authState.isAuthenticated && (
-            <Menu.Item onClick={login}>Login</Menu.Item>
-          )}
+          <div style={{ display: 'flex' }}>
+            {authState.isAuthenticated && (
+              <Menu.Item id="profile-button">
+                <Link to="/profile">Profile</Link>
+              </Menu.Item>
+            )}
+            {authState.isAuthenticated && (
+              <Menu.Item id="apps-button">
+                <Link to="/apps">Applications</Link>
+              </Menu.Item>
+            )}
+            {authState.isAuthenticated && (
+              <Menu.Item id="api-button">
+                <Link to="/api">API Center</Link>
+              </Menu.Item>
+            )}
+            {authState.isAuthenticated && (
+              <Menu.Item id="logout-button" onClick={logout}>
+                Logout
+              </Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item onClick={login}>Login</Menu.Item>
+            )}
+          </div>
         </Container>
       </Menu>
     </div>

@@ -19,10 +19,8 @@ const Home = () => {
   const history = useHistory();
   const { authState, oktaAuth } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
-  const [session, setSession] = useState(false);
 
   useEffect(() => {
-    
     if (!authState || !authState.isAuthenticated) {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);
@@ -39,23 +37,8 @@ const Home = () => {
   }, [authState, oktaAuth]); // Update if authState changes
 
   const login = async () => {
-    history.push('/login');
+    oktaAuth.signInWithRedirect({ originalUri: '/' });
   };
-
-  const resourceServerExamples = [
-    {
-      label: 'Node/Express Resource Server Example',
-      url: 'https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server',
-    },
-    {
-      label: 'Java/Spring MVC Resource Server Example',
-      url: 'https://github.com/okta/samples-java-spring/tree/master/resource-server',
-    },
-    {
-      label: 'ASP.NET Core Resource Server Example',
-      url: 'https://github.com/okta/samples-aspnetcore/tree/master/samples-aspnetcore-3x/resource-server',
-    },
-  ];
 
   if (!authState) {
     return <div>Loading...</div>;
@@ -86,9 +69,9 @@ const Home = () => {
         {!authState.isAuthenticated && (
           <div>
             <p>Login to view your profile.</p>
-            <Button id="login-button" primary onClick={login}>
+            {/* <Button id="login-button" primary onClick={login}>
               Login
-            </Button>
+            </Button> */}
           </div>
         )}
       </div>

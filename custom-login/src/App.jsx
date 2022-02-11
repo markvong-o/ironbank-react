@@ -16,12 +16,13 @@ import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import { Container } from 'semantic-ui-react';
 import config from './config';
-import Home from './Home';
-import CustomLoginComponent from './Login';
+import Home from './views/Home';
+import CustomLoginComponent from './views/Login';
 import Messages from './Messages';
 import Navbar from './Navbar';
-import Profile from './Profile';
-import Applications from './Applications';
+import Profile from './views/Profile';
+import Applications from './views/Applications';
+import Api from "./views/Api";
 import CorsErrorModal from './CorsErrorModal';
 import AuthRequiredModal from './AuthRequiredModal';
 
@@ -98,6 +99,7 @@ const App = () => {
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
           <SecureRoute path="/apps" component={Applications} />
+          <SecureRoute path="/api" component={Api} />
         </Switch>
       </Container>
     </Security>
