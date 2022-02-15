@@ -38,6 +38,38 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 } */
+@import url('https://fonts.googleapis.com/css2?family=Monda&display=swap');
+:root {
+  --core-font: 'Monda', serif;
+}
+
 #main-container {
-  margin-top: 6rem;
+  margin: 6rem 0 0 0;
+  padding: 0;
+  width: 100%;
+  /* color: red !important; */
+  font-family: var(--core-font);
+  text-align: center;
+  
+}
+
+ul {
+  /* border: 1px red solid; */
+}
+li {
+  /* margin-inline-start: 10%; */
+  /* writing-mode: vertical-rl; */
+  /* border: 1px green solid; */
+  /* direction: rtl; */
+}
+
+#menu,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+input {
+  font-family: var(--core-font) !important;
 }

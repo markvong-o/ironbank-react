@@ -49,7 +49,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
 
   return (
     <div>
-      <Menu fixed="top" inverted>
+      <Menu fixed="top" inverted id="menu">
         <Container
           style={{
             display: 'flex',

@@ -76,7 +76,7 @@ const Applications = () => {
 
   return (
     <div>
-      <div>
+      <div id="main-app-container">
         <Header as="h1">
           <Icon name="medapps" color="teal" /> My Applications{' '}
         </Header>

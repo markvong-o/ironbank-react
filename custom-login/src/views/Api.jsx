@@ -91,6 +91,7 @@ const Api = () => {
       setAccessToken(res.tokens.accessToken.accessToken);
     }
   };
+  const getToken = document.getElementById('get-token-container');
 
   const clearData = () => {
     setResponse(null);
@@ -99,7 +100,7 @@ const Api = () => {
   };
 
   return (
-    <div id="main-container">
+    <div id="main-api-container">
       <div id="internal-container">
         <Header as="h1">
           <Icon name="openid" color="yellow" /> Access Token{' '}
@@ -109,7 +110,15 @@ const Api = () => {
             <span className="method">
               Separate scopes by a single whitespace
             </span>
-            <input value={scopes} onChange={(e) => setScopes(e.target.value)} />
+            <input
+              value={scopes}
+              onChange={(e) => {
+                setScopes(e.target.value);
+                if (getToken) {
+                  getToken.style.width = e.target.value.length + 'ch';
+                }
+              }}
+            />
             <button onClick={getAccessToken}>Get Access Token</button>
           </div>
         )}
@@ -117,27 +126,29 @@ const Api = () => {
         {accessToken && (
           <div id="main-token-container">
             <button onClick={clearData}>Get a new Access Token</button>
-            <div id="raw-token-container" className="data-container">
-              <textarea value={accessToken} readOnly />
-              <button
-                onClick={() => navigator.clipboard.writeText(accessToken)}
-              >
-                Copy Access Token
-              </button>
-            </div>
-
-            {claims && (
-              <div id="claims-container" className="data-container">
-                <pre>{JSON.stringify(claims, undefined, 2)}</pre>
+            <div id="inner-token-container">
+              <div id="raw-token-container" className="data-container">
+                <textarea value={accessToken} readOnly />
                 <button
-                  onClick={() =>
-                    navigator.clipboard.writeText(JSON.stringify(claims))
-                  }
+                  onClick={() => navigator.clipboard.writeText(accessToken)}
                 >
-                  Copy Data
+                  Copy Access Token
                 </button>
               </div>
-            )}
+
+              {claims && (
+                <div id="claims-container" className="data-container">
+                  <pre>{JSON.stringify(claims, undefined, 2)}</pre>
+                  <button
+                    onClick={() =>
+                      navigator.clipboard.writeText(JSON.stringify(claims))
+                    }
+                  >
+                    Copy Data
+                  </button>
+                </div>
+              )}
+            </div>
 
             <div id="api-container">
               <Header as="h2">Test the API with above Access Token:</Header>

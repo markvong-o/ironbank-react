@@ -1,10 +1,18 @@
+#main-app-container {
+    /* border: 1px green solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 ul {
     /* border: 1px red solid; */
     list-style-type: none;
     display: flex;
-    width: 100%;
-    /* justify-content: space-between; */
-    /* align-items: space-between; */
+    width: 60vw;
+    /* justify-content: center;
+    align-items: center; */
     padding: 0;
     margin: 1.6rem;
     flex-wrap: wrap;
