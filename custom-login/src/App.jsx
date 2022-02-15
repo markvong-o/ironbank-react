@@ -82,7 +82,7 @@ const App = () => {
       <AuthRequiredModal
         {...{ authRequiredModalOpen, setAuthRequiredModalOpen, triggerLogin }}
       />
-      <Container id="main-container">
+      <Container text id="main-container">
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login/callback" component={LoginCallback} />
