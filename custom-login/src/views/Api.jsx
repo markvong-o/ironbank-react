@@ -103,7 +103,7 @@ const Api = () => {
     <div id="main-api-container">
       <div id="internal-container">
         <Header as="h1">
-          <Icon name="openid" color="yellow" /> Access Token{' '}
+          <Icon name="dollar sign" color="green" /> My Balance{' '}
         </Header>
         {!accessToken && (
           <div id="get-token-container">
@@ -125,6 +125,7 @@ const Api = () => {
 
         {accessToken && (
           <div id="main-token-container">
+            <Header as="h2"><Icon name="openid" color="yellow" />Access Token</Header>
             <button onClick={clearData}>Get a new Access Token</button>
             <div id="inner-token-container">
               <div id="raw-token-container" className="data-container">
@@ -151,7 +152,7 @@ const Api = () => {
             </div>
 
             <div id="api-container">
-              <Header as="h2">Test the API with above Access Token:</Header>
+              <Header as="h2">Get your balance with the above Access Token:</Header>
               {!response ? (
                 <div id="call-api-container">
                   <span className="method">GET:</span>

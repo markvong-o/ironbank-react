@@ -48,6 +48,7 @@ button:hover {
     /* height: 100%; */
     flex-wrap:wrap;
     flex-direction: column;
+    text-align: left;
 }
 
 #get-token-container {
@@ -63,7 +64,9 @@ button:hover {
         "a b";
         grid-template-columns: 50%;
     height: max-content;
-    /* border: 1px red solid; */
+    /* border: 1px black solid; */
+    width: max-content;
+    margin: 1.2rem 0;
 }
 
 #raw-token-container {
