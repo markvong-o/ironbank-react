@@ -38,7 +38,8 @@ const App = () => {
 
   const triggerLogin = () => {
     // Redirect to the /login page that has a CustomLoginComponent
-    history.push('/login');
+    // history.push('/login');
+    oktaAuth.signInWithRedirect();
   };
 
   const restoreOriginalUri = async (_oktaAuth, originalUri) => {

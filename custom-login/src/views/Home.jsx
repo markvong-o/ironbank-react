@@ -37,7 +37,7 @@ const Home = () => {
   }, [authState, oktaAuth]); // Update if authState changes
 
   const login = async () => {
-    oktaAuth.signInWithRedirect({ originalUri: '/' });
+    oktaAuth.signInWithRedirect();
   };
 
   if (!authState) {
