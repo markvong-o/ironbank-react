@@ -11,14 +11,15 @@
  */
 /*eslint-disable*/
 import { useOktaAuth } from '@okta/okta-react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Container, Image, Menu } from 'semantic-ui-react';
+import { OktaAuth } from '@okta/okta-auth-js';
 
 const Navbar = ({ setCorsErrorModalOpen }) => {
   const history = useHistory();
   const { authState, oktaAuth } = useOktaAuth();
-
+  const [adminRoles, setAdminRoles] = useState([]);
   // Note: Can't distinguish CORS error from other network errors
   const isCorsError = (err) =>
     err.name === 'AuthApiError' &&
@@ -43,12 +44,49 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     }
   };
 
+  const BASENAME = process.env.PUBLIC_URL || '';
+  const DOMAIN = 'https://thecrownlands.game-of-thrones.us';
+  const config = {
+    clientId: '0oa15b5c0s76WBRdl0h8',
+    issuer: DOMAIN,
+    redirectUri: `${window.location.origin}${BASENAME}/login/callback`,
+    scopes: [
+      'openid',
+      'profile',
+      'email',
+      'okta.users.manage',
+      'okta.groups.manage',
+      'okta.apps.manage',
+      'okta.roles.manage',
+    ],
+  };
+
+  const localOktaAuth = new OktaAuth(config);
+
+  useEffect(() => {
+    const checkAdmin = async () => {
+      const tokens = await localOktaAuth.token.getWithoutPrompt();
+      const accessToken = tokens.tokens.accessToken.accessToken;
+      const app_options = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const url = `https://thecrownlands.game-of-thrones.us/api/v1/users/${authState.accessToken.claims.uid}/roles`;
+      const resp = await fetch(url, app_options);
+      const json = await resp.json();
+      console.log(json);
+      setAdminRoles(json);
+    };
+    if (authState && authState.isAuthenticated) {
+      checkAdmin();
+    }
+  }, [oktaAuth, authState]);
+
   if (!authState) {
     return null;
-  }
-
-  const isAdmin = () => {
-    return authState.accessToken.claims.groups.includes("Super Administrators");
   }
 
   return (
@@ -85,7 +123,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                 <Link to="/balance">Check Balance</Link>
               </Menu.Item>
             )}
-            {authState.isAuthenticated && isAdmin() && (
+            {authState.isAuthenticated && adminRoles.length > 0 && (
               <Menu.Item id="api-button">
                 <Link to="/admin">Admin Portal</Link>
               </Menu.Item>
