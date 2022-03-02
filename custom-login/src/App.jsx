@@ -23,6 +23,7 @@ import Navbar from './Navbar';
 import Profile from './views/Profile';
 import Applications from './views/Applications';
 import Api from './views/Api';
+import Admin from './views/Admin';
 import CorsErrorModal from './CorsErrorModal';
 import AuthRequiredModal from './AuthRequiredModal';
 import "./App.css";
@@ -103,6 +104,7 @@ const App = () => {
           <SecureRoute path="/profile" component={Profile} />
           <SecureRoute path="/apps" component={Applications} />
           <SecureRoute path="/balance" component={Api} />
+          <SecureRoute path="/admin" component={Admin} />
         </Switch>
       </Container>
     </Security>

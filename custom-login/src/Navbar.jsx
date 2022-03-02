@@ -47,6 +47,10 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     return null;
   }
 
+  const isAdmin = () => {
+    return authState.accessToken.claims.groups.includes("Super Administrators");
+  }
+
   return (
     <div>
       <Menu fixed="top" inverted id="menu">
@@ -81,6 +85,12 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                 <Link to="/balance">Check Balance</Link>
               </Menu.Item>
             )}
+            {authState.isAuthenticated && isAdmin() && (
+              <Menu.Item id="api-button">
+                <Link to="/admin">Admin Portal</Link>
+              </Menu.Item>
+            )}
+
             {authState.isAuthenticated && (
               <Menu.Item id="logout-button" onClick={logout}>
                 Logout
