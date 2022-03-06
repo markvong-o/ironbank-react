@@ -27,6 +27,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     err.xhr.message === 'Failed to fetch';
 
   const login = async () => {
+    // history.push("/login");
     oktaAuth.signInWithRedirect({ originalUri: '/' });
   };
 
@@ -64,25 +65,25 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   const localOktaAuth = new OktaAuth(config);
 
   useEffect(() => {
-    const checkAdmin = async () => {
-      const tokens = await localOktaAuth.token.getWithoutPrompt();
-      const accessToken = tokens.tokens.accessToken.accessToken;
-      const app_options = {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
+    // const checkAdmin = async () => {
+    //   const tokens = await localOktaAuth.token.getWithoutPrompt();
+    //   const accessToken = tokens.tokens.accessToken.accessToken;
+    //   const app_options = {
+    //     method: 'GET',
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //   };
 
-      const url = `https://thecrownlands.game-of-thrones.us/api/v1/users/${authState.accessToken.claims.uid}/roles`;
-      const resp = await fetch(url, app_options);
-      const json = await resp.json();
-      console.log(json);
-      setAdminRoles(json);
-    };
-    if (authState && authState.isAuthenticated) {
-      checkAdmin();
-    }
+    //   const url = `https://thecrownlands.game-of-thrones.us/api/v1/users/${authState.accessToken.claims.uid}/roles`;
+    //   const resp = await fetch(url, app_options);
+    //   const json = await resp.json();
+    //   // console.log(json);
+    //   setAdminRoles(json);
+    // };
+    // if (authState && authState.isAuthenticated) {
+    //   checkAdmin();
+    // }
   }, [oktaAuth, authState]);
 
   if (!authState) {

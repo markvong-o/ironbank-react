@@ -38,6 +38,7 @@ const Home = () => {
 
   const login = async () => {
     oktaAuth.signInWithRedirect();
+    // history.push("/login");
   };
 
   if (!authState) {

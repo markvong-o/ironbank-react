@@ -50,7 +50,6 @@ const AdminView = () => {
             : resource === 'GROUPS'
             ? groupsUrl
             : appsUrl;
-        // console.log(url);
         const app_options = {
           method,
           headers: {
@@ -62,25 +61,17 @@ const AdminView = () => {
 
         switch (resource) {
           case 'USERS':
-            // console.log(json);
             setUsers(json);
           case 'GROUPS':
-            // console.log(json);
             setGroups(json);
           case 'APPS':
-            // console.log(json);
             setApps(json);
         }
       };
       request('GET', 'USERS');
-      //   request('GET', 'GROUPS');
-      //   request('GET', 'APPS');
     }
   }, [authState, oktaAuth]); // Update if authState changes
 
-  //   if (users.length <= 0 || groups.length <= 0 || apps.length <= 0) {
-  //     return 'Loading data...';
-  //   }
 
   const getResource = async (method, user, resource) => {
     const tokens = await localOktaAuth.token.getWithoutPrompt();
@@ -96,7 +87,6 @@ const AdminView = () => {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    // console.log(url);
     const resp = await fetch(url, app_options);
     const json = await resp.json();
     switch (resource) {
@@ -108,14 +98,16 @@ const AdminView = () => {
   };
 
   const isActive = (e) => {
-    // console.log(e.target.value);
     setCurrUser(e.target.innerText);
     setGroups([]);
     setApps([]);
     getResource('GET', e.target.value, 'GROUPS');
     getResource('GET', e.target.value, 'APPS');
-    // console.log(e.target);
   };
+
+  const handleHidden = (e) => {
+    console.log(e.target)
+  }
 
   return (
     <div id="admin-main-container">
@@ -157,7 +149,7 @@ const AdminView = () => {
                     inverted color="blue"
                   >
                     <Button.Content visible>{group.profile.name}</Button.Content>
-                    <Button.Content  hidden>Remove</Button.Content>
+                    <Button.Content  onClick={handleHidden} hidden id={group.id}>Remove</Button.Content>
                   </Button>
                 ))}
               </Button.Group>
