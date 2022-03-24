@@ -57,7 +57,7 @@ const App = () => {
       }
     })
     .catch((err) => console.log(err));
-
+console.log("app test");
   const customAuthHandler = async () => {
     const previousAuthState = oktaAuth.authStateManager.getPreviousAuthState();
     if (!previousAuthState || !previousAuthState.isAuthenticated) {
@@ -94,6 +94,7 @@ const App = () => {
               <LoginCallback />
             )}
           /> */}
+          
           <Route
             path="/login"
             render={() => (
