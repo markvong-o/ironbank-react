@@ -19,7 +19,7 @@ import { OktaAuth } from '@okta/okta-auth-js';
 const Navbar = ({ setCorsErrorModalOpen }) => {
   const history = useHistory();
   const { authState, oktaAuth } = useOktaAuth();
-  const [adminRoles, setAdminRoles] = useState([]);
+  const [isAdmin, setAdmin] = useState(false);
   // Note: Can't distinguish CORS error from other network errors
   const isCorsError = (err) =>
     err.name === 'AuthApiError' &&
@@ -66,20 +66,24 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
 
   useEffect(() => {
     const checkAdmin = async () => {
-      const tokens = await localOktaAuth.token.getWithoutPrompt();
-      const accessToken = tokens.tokens.accessToken.accessToken;
+      const data = {
+        uid: `${authState.accessToken.claims.uid}`
+      }
+
       const app_options = {
-        method: 'GET',
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
+        body: JSON.stringify(data)
       };
 
-      const url = `https://thecrownlands.game-of-thrones.us/api/v1/users/${authState.accessToken.claims.uid}/roles`;
+      const url = 'https://okta-custom-api.glitch.me/verifyAdmin'
       const resp = await fetch(url, app_options);
       const json = await resp.json();
       // console.log(json);
-      setAdminRoles(json);
+      setAdmin(json["isAdmin"]);
     };
     if (authState && authState.isAuthenticated) {
       checkAdmin();
@@ -124,7 +128,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                 <Link to="/balance">Check Balance</Link>
               </Menu.Item>
             )}
-            {authState.isAuthenticated && adminRoles.length > 0 && (
+            {authState.isAuthenticated && isAdmin && (
               <Menu.Item id="api-button">
                 <Link to="/admin">Admin Portal</Link>
               </Menu.Item>
