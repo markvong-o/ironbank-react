@@ -17,7 +17,7 @@ import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
 import config from '../config';
 
-const Login = ({ setCorsErrorModalOpen, language, logo }) => {
+const Login = ({ setCorsErrorModalOpen, language, logo, company }) => {
   const { oktaAuth } = useOktaAuth();
   const widgetRef = useRef();
   console.log(language);
@@ -43,7 +43,7 @@ const Login = ({ setCorsErrorModalOpen, language, logo }) => {
       logo,
       i18n: {
         en: {
-          'primaryauth.title': `Sign In to the Iron Bank`,
+          'primaryauth.title': `Sign In to ${company}`,
         },
       },
       authParams: {

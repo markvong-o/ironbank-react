@@ -96,7 +96,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
 
   return (
     <div>
-      <Menu fixed="top" inverted id="menu">
+      <Menu fixed="top" id="menu">
         <Container
           style={{
             display: 'flex',
@@ -107,10 +107,12 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
           <Menu.Item header>
             <Image
               size="mini"
-              src={`${process.env.PUBLIC_URL}/bank-logo.png`}
+              src={`${process.env.PUBLIC_URL}/nike-logo.png`}
             />
             &nbsp;
-            <Link to="/">Iron Bank</Link>
+            <Link to="/" style={{ color: 'black' }}>
+              Nike
+            </Link>
           </Menu.Item>
           <div style={{ display: 'flex' }}>
             {authState.isAuthenticated && (

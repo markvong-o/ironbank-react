@@ -37,6 +37,7 @@ const App = () => {
 
   const language = 'en';
   const logo = `${process.env.PUBLIC_URL}/nike-logo.png`;
+  const company = "Nike";
 
   const history = useHistory(); // example from react-router
 
@@ -103,7 +104,7 @@ const App = () => {
             path="/login/us"
             render={() => (
               <CustomLoginComponent
-                {...{ setCorsErrorModalOpen, language: 'en', logo }}
+                {...{ setCorsErrorModalOpen, language: 'en', logo, company }}
               />
             )}
           />
@@ -112,7 +113,7 @@ const App = () => {
             path="/login/jp"
             render={() => (
               <CustomLoginComponent
-                {...{ setCorsErrorModalOpen, language: 'ja', logo }}
+                {...{ setCorsErrorModalOpen, language: 'ja', logo, company }}
               />
             )}
           />
@@ -121,7 +122,7 @@ const App = () => {
             path="/login/ar"
             render={() => (
               <CustomLoginComponent
-                {...{ setCorsErrorModalOpen, language: 'es', logo }}
+                {...{ setCorsErrorModalOpen, language: 'es', logo, company }}
               />
             )}
           />
@@ -129,7 +130,7 @@ const App = () => {
             path="/login"
             render={() => (
               <CustomLoginComponent
-                {...{ setCorsErrorModalOpen, language, logo }}
+                {...{ setCorsErrorModalOpen, language, logo, company }}
               />
             )}
           />
@@ -141,6 +142,7 @@ const App = () => {
                   setCorsErrorModalOpen,
                   language,
                   logo: `${process.env.PUBLIC_URL}/footlocker-logo.png`,
+                  company: "Foot Locker"
                 }}
               />
             )}
@@ -153,6 +155,7 @@ const App = () => {
                   setCorsErrorModalOpen,
                   language,
                   logo: `${process.env.PUBLIC_URL}/gatorade-logo.png`,
+                  company: "Gatorade"
                 }}
               />
             )}
@@ -165,6 +168,7 @@ const App = () => {
                   setCorsErrorModalOpen,
                   language,
                   logo: `${process.env.PUBLIC_URL}/usa-logo.png`,
+                  company: "USA"
                 }}
               />
             )}
