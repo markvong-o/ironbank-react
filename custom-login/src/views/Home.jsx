@@ -48,7 +48,7 @@ const Home = () => {
   return (
     <div id="home">
       <div>
-        <Header as="h1">Welcome to the Iron Bank</Header>
+        <Header as="h1">Welcome to Nike</Header>
 
         {authState.isAuthenticated && !userInfo && (
           <div>Loading user information...</div>
