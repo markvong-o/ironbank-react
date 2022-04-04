@@ -17,7 +17,7 @@ import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
 import config from '../config';
 
-const Login = ({ setCorsErrorModalOpen, language }) => {
+const Login = ({ setCorsErrorModalOpen, language, logo }) => {
   const { oktaAuth } = useOktaAuth();
   const widgetRef = useRef();
   console.log(language);
@@ -40,7 +40,7 @@ const Login = ({ setCorsErrorModalOpen, language }) => {
       baseUrl: issuer.split('/oauth2')[0],
       clientId,
       redirectUri,
-      logo: `${process.env.PUBLIC_URL}/bank-logo.png`,
+      logo,
       i18n: {
         en: {
           'primaryauth.title': `Sign In to the Iron Bank`,

@@ -36,6 +36,7 @@ const App = () => {
     React.useState(false);
 
   const language = 'en';
+  const logo = `${process.env.PUBLIC_URL}/nike-logo.png`;
 
   const history = useHistory(); // example from react-router
 
@@ -102,7 +103,7 @@ const App = () => {
             path="/login/us"
             render={() => (
               <CustomLoginComponent
-                {...{ setCorsErrorModalOpen, language: 'en' }}
+                {...{ setCorsErrorModalOpen, language: 'en', logo }}
               />
             )}
           />
@@ -111,7 +112,7 @@ const App = () => {
             path="/login/jp"
             render={() => (
               <CustomLoginComponent
-                {...{ setCorsErrorModalOpen, language: 'ja' }}
+                {...{ setCorsErrorModalOpen, language: 'ja', logo }}
               />
             )}
           />
@@ -120,14 +121,52 @@ const App = () => {
             path="/login/ar"
             render={() => (
               <CustomLoginComponent
-                {...{ setCorsErrorModalOpen, language: 'es' }}
+                {...{ setCorsErrorModalOpen, language: 'es', logo }}
               />
             )}
           />
           <Route
             path="/login"
             render={() => (
-              <CustomLoginComponent {...{ setCorsErrorModalOpen, language }} />
+              <CustomLoginComponent
+                {...{ setCorsErrorModalOpen, language, logo }}
+              />
+            )}
+          />
+          <Route
+            path="/footlocker"
+            render={() => (
+              <CustomLoginComponent
+                {...{
+                  setCorsErrorModalOpen,
+                  language,
+                  logo: `${process.env.PUBLIC_URL}/footlocker-logo.png`,
+                }}
+              />
+            )}
+          />
+          <Route
+            path="/gatorade"
+            render={() => (
+              <CustomLoginComponent
+                {...{
+                  setCorsErrorModalOpen,
+                  language,
+                  logo: `${process.env.PUBLIC_URL}/gatorade-logo.png`,
+                }}
+              />
+            )}
+          />
+          <Route
+            path="/usa"
+            render={() => (
+              <CustomLoginComponent
+                {...{
+                  setCorsErrorModalOpen,
+                  language,
+                  logo: `${process.env.PUBLIC_URL}/usa-logo.png`,
+                }}
+              />
             )}
           />
           <SecureRoute path="/messages" component={Messages} />
