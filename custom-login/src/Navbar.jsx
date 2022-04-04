@@ -27,8 +27,8 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     err.xhr.message === 'Failed to fetch';
 
   const login = async () => {
-    // history.push("/login");
-    oktaAuth.signInWithRedirect({ originalUri: '/' });
+    history.push('/login');
+    // oktaAuth.signInWithRedirect({ originalUri: '/' });
   };
 
   const logout = async () => {
@@ -67,8 +67,8 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   useEffect(() => {
     const checkAdmin = async () => {
       const data = {
-        uid: `${authState.accessToken.claims.uid}`
-      }
+        uid: `${authState.accessToken.claims.uid}`,
+      };
 
       const app_options = {
         method: 'POST',
@@ -76,14 +76,14 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       };
 
-      const url = 'https://okta-custom-api.glitch.me/verifyAdmin'
+      const url = 'https://okta-custom-api.glitch.me/verifyAdmin';
       const resp = await fetch(url, app_options);
       const json = await resp.json();
       // console.log(json);
-      setAdmin(json["isAdmin"]);
+      setAdmin(json['isAdmin']);
     };
     if (authState && authState.isAuthenticated) {
       checkAdmin();
@@ -140,7 +140,31 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
               </Menu.Item>
             )}
             {!authState.isPending && !authState.isAuthenticated && (
-              <Menu.Item onClick={login}>Login</Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  window.location.href = '/login/us';
+                }}
+              >
+                Login
+              </Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item
+                onClick={() => {
+                  window.location.href = '/login/jp';
+                }}
+              >
+                ログインする
+              </Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item
+                onClick={() => {
+                  window.location.href = '/login/ar';
+                }}
+              >
+                Iniciar Sesión
+              </Menu.Item>
             )}
           </div>
         </Container>

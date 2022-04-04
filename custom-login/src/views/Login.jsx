@@ -17,13 +17,17 @@ import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
 import config from '../config';
 
-const Login = ({ setCorsErrorModalOpen }) => {
+const Login = ({ setCorsErrorModalOpen, language }) => {
   const { oktaAuth } = useOktaAuth();
   const widgetRef = useRef();
-
+  console.log(language);
   useEffect(() => {
     if (!widgetRef.current) {
+      console.log("teest");
       return false;
+    }
+    else {
+      console.log("else");
     }
 
     const { issuer, clientId, redirectUri, scopes, useInteractionCode } = config.oidc;
@@ -39,7 +43,7 @@ const Login = ({ setCorsErrorModalOpen }) => {
       logo: `${process.env.PUBLIC_URL}/bank-logo.png`,
       i18n: {
         en: {
-          'primaryauth.title': 'Sign in to the Iron Bank',
+          'primaryauth.title': `Sign In to the Iron Bank`,
         },
       },
       authParams: {
@@ -53,8 +57,11 @@ const Login = ({ setCorsErrorModalOpen }) => {
       },
       idpDiscovery: {
         requestContext: window.location.origin
-      }
+      },
+      language
     });
+
+    console.log("enter");
 
     widget.renderEl(
       { el: widgetRef.current },
@@ -77,7 +84,7 @@ const Login = ({ setCorsErrorModalOpen }) => {
 
     return () => widget.remove();
   }, [oktaAuth]);
-
+console.log("exit");
   return (
     <div>
       <div ref={widgetRef} />

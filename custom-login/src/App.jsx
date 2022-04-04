@@ -26,7 +26,7 @@ import Api from './views/Api';
 import Admin from './views/Admin';
 import CorsErrorModal from './CorsErrorModal';
 import AuthRequiredModal from './AuthRequiredModal';
-import "./App.css";
+import './App.css';
 
 const oktaAuth = new OktaAuth(config.oidc);
 
@@ -34,6 +34,8 @@ const App = () => {
   const [corsErrorModalOpen, setCorsErrorModalOpen] = React.useState(false);
   const [authRequiredModalOpen, setAuthRequiredModalOpen] =
     React.useState(false);
+
+  const language = 'en';
 
   const history = useHistory(); // example from react-router
 
@@ -57,7 +59,7 @@ const App = () => {
       }
     })
     .catch((err) => console.log(err));
-    
+
   const customAuthHandler = async () => {
     const previousAuthState = oktaAuth.authStateManager.getPreviousAuthState();
     if (!previousAuthState || !previousAuthState.isAuthenticated) {
@@ -94,11 +96,38 @@ const App = () => {
               <LoginCallback />
             )}
           /> */}
-          
+
+          <Route
+            exact
+            path="/login/us"
+            render={() => (
+              <CustomLoginComponent
+                {...{ setCorsErrorModalOpen, language: 'en' }}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/login/jp"
+            render={() => (
+              <CustomLoginComponent
+                {...{ setCorsErrorModalOpen, language: 'ja' }}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/login/ar"
+            render={() => (
+              <CustomLoginComponent
+                {...{ setCorsErrorModalOpen, language: 'es' }}
+              />
+            )}
+          />
           <Route
             path="/login"
             render={() => (
-              <CustomLoginComponent {...{ setCorsErrorModalOpen }} />
+              <CustomLoginComponent {...{ setCorsErrorModalOpen, language }} />
             )}
           />
           <SecureRoute path="/messages" component={Messages} />
