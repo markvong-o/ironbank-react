@@ -20,14 +20,9 @@ import config from '../config';
 const Login = ({ setCorsErrorModalOpen, language, logo, company }) => {
   const { oktaAuth } = useOktaAuth();
   const widgetRef = useRef();
-  console.log(language);
   useEffect(() => {
     if (!widgetRef.current) {
-      console.log("teest");
       return false;
-    }
-    else {
-      console.log("else");
     }
 
     const { issuer, clientId, redirectUri, scopes, useInteractionCode } = config.oidc;
@@ -61,8 +56,6 @@ const Login = ({ setCorsErrorModalOpen, language, logo, company }) => {
       language
     });
 
-    console.log("enter");
-
     widget.renderEl(
       { el: widgetRef.current },
       (res) => {
@@ -84,7 +77,6 @@ const Login = ({ setCorsErrorModalOpen, language, logo, company }) => {
 
     return () => widget.remove();
   }, [oktaAuth]);
-console.log("exit");
   return (
     <div>
       <div ref={widgetRef} />
