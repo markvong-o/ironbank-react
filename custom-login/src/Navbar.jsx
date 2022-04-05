@@ -46,20 +46,12 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   };
 
   const BASENAME = process.env.PUBLIC_URL || '';
-  const DOMAIN = 'https://thecrownlands.game-of-thrones.us';
+  const DOMAIN = 'https://nike.okta-preview.tk';
   const config = {
-    clientId: '0oa15b5c0s76WBRdl0h8',
+    clientId: '0oa16pc7zf65PE2ny0h8',
     issuer: DOMAIN,
     redirectUri: `${window.location.origin}${BASENAME}/login/callback`,
-    scopes: [
-      'openid',
-      'profile',
-      'email',
-      'okta.users.manage',
-      'okta.groups.manage',
-      'okta.apps.manage',
-      'okta.roles.manage',
-    ],
+    scopes: ['openid', 'profile', 'email'],
   };
 
   const localOktaAuth = new OktaAuth(config);
@@ -166,6 +158,27 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                 }}
               >
                 Iniciar Sesión
+              </Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item onClick={() => localOktaAuth.signInWithRedirect()}>
+                Login Redirect
+              </Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item onClick={() => {
+                localOktaAuth.options.clientId = "0oa16pc0pm5EhCluP0h8";
+                localOktaAuth.signInWithRedirect();
+              }}>
+                Iniciar Sesión Redirigir
+              </Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item onClick={() => {
+                localOktaAuth.options.clientId = "0oa16pc6mjt4zgOxi0h8";
+                localOktaAuth.signInWithRedirect();
+              }}>
+                Login to Gatorade
               </Menu.Item>
             )}
           </div>
