@@ -17,21 +17,24 @@ import { Header, Icon, Table } from 'semantic-ui-react';
 import { getTokenSourceMapRange } from 'typescript';
 import '../css/Applications.css';
 
+import config from "../config";
+
 const Applications = () => {
   const { authState, oktaAuth } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
   const [apps, setApps] = useState([]);
-  const BASENAME = process.env.PUBLIC_URL || '';
-  const config = {
-    clientId: '0oa15b5c0s76WBRdl0h8',
-    issuer: 'https://thecrownlands.game-of-thrones.us',
-    redirectUri: `${window.location.origin}${BASENAME}/login/callback`,
-    scopes: ['openid', 'profile', 'email', 'okta.users.read.self'],
-  };
-
-  const localOktaAuth = new OktaAuth(config);
 
   useEffect(() => {
+    const {clientId, issuer, redirectUri} = config.oidc;
+    const baseUrl = issuer.split("/oauth2")[0];
+    const c = {
+      clientId,
+      issuer: baseUrl,
+      redirectUri,
+      scopes: ['openid', 'profile', 'email', 'okta.users.read.self']
+    }
+    const localOktaAuth = new OktaAuth(c);
+
     if (!authState || !authState.isAuthenticated) {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);
@@ -41,7 +44,7 @@ const Applications = () => {
         const accessToken = tokens.tokens.accessToken.accessToken;
 
         const url =
-          'https://thecrownlands.game-of-thrones.us/api/v1/users/me/appLinks';
+          `${baseUrl}/api/v1/users/me/appLinks`;
         const app_options = {
           method: 'GET',
           headers: {
