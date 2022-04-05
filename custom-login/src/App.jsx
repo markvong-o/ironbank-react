@@ -95,12 +95,12 @@ const App = () => {
             )}
           /> */}
           
-          <Route
+          {/* <Route
             path="/login"
             render={() => (
               <CustomLoginComponent {...{ setCorsErrorModalOpen }} />
             )}
-          />
+          /> */}
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
           <SecureRoute path="/apps" component={Applications} />
