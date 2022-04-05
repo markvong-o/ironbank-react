@@ -15,11 +15,14 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Container, Image, Menu } from 'semantic-ui-react';
 import { OktaAuth } from '@okta/okta-auth-js';
+import config from './config';
 
 const Navbar = ({ setCorsErrorModalOpen }) => {
   const history = useHistory();
   const { authState, oktaAuth } = useOktaAuth();
   const [adminRoles, setAdminRoles] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   // Note: Can't distinguish CORS error from other network errors
   const isCorsError = (err) =>
     err.name === 'AuthApiError' &&
@@ -45,41 +48,36 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     }
   };
 
-  const BASENAME = process.env.PUBLIC_URL || '';
-  const DOMAIN = 'https://thecrownlands.game-of-thrones.us';
-  const config = {
-    clientId: '0oa15b5c0s76WBRdl0h8',
-    issuer: DOMAIN,
-    redirectUri: `${window.location.origin}${BASENAME}/login/callback`,
-    scopes: [
-      'openid',
-      'profile',
-      'email',
-      'okta.users.manage',
-      'okta.groups.manage',
-      'okta.apps.manage',
-      'okta.roles.manage',
-    ],
-  };
-
-  const localOktaAuth = new OktaAuth(config);
-
   useEffect(() => {
+    const { issuer, clientId, redirectUri } = config.oidc;
+    const BASENAME = process.env.PUBLIC_URL || '';
+    const c = {
+      clientId,
+      issuer: issuer.split('/oauth2')[0],
+      redirectUri,
+      scopes: ['openid', 'profile', 'email'],
+    };
+    const localOktaAuth = new OktaAuth(c);
+
     const checkAdmin = async () => {
-      const tokens = await localOktaAuth.token.getWithoutPrompt();
-      const accessToken = tokens.tokens.accessToken.accessToken;
-      const app_options = {
-        method: 'GET',
+      let user = await oktaAuth.getUser();
+      let url = 'https://okta-custom-api.glitch.me/verifyAdmin';
+      let data = {
+        uid: user.sub,
+        isOie: true,
+      };
+      const options = {
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
+        body: JSON.stringify(data),
       };
 
-      const url = `https://thecrownlands.game-of-thrones.us/api/v1/users/${authState.accessToken.claims.uid}/roles`;
-      const resp = await fetch(url, app_options);
-      const json = await resp.json();
-      // console.log(json);
-      setAdminRoles(json);
+      let res = await fetch(url, options);
+      let json = await res.json();
+      setIsAdmin(json.isAdmin);
     };
     if (authState && authState.isAuthenticated) {
       checkAdmin();
@@ -124,7 +122,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                 <Link to="/balance">Check Balance</Link>
               </Menu.Item>
             )}
-            {authState.isAuthenticated && adminRoles.length > 0 && (
+            {authState.isAuthenticated && isAdmin && (
               <Menu.Item id="api-button">
                 <Link to="/admin">Admin Portal</Link>
               </Menu.Item>
