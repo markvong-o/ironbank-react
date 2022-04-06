@@ -50,7 +50,7 @@ const Admin = () => {
         <Button
           onClick={() => {
             window.open(
-              'https://thecrownlands.game-of-thrones.us/home/admin-entry',
+              'https://crownlands.game-of-thrones.us/home/admin-entry',
               '_blank'
             );
           }}

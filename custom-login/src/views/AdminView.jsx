@@ -5,6 +5,8 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
 import '../css/Admin.css';
 
+import config from "../config";
+
 const AdminView = () => {
   const { authState, oktaAuth } = useOktaAuth();
   const [users, setUsers] = useState([]);
@@ -16,17 +18,17 @@ const AdminView = () => {
 
   const [currUser, setCurrUser] = useState(null);
 
-  const BASENAME = process.env.PUBLIC_URL || '';
-  const DOMAIN = 'https://thecrownlands.game-of-thrones.us';
+  const {clientId, issuer, redirectUri} = config.oidc;
+  const DOMAIN = issuer.split("/oauth2")[0];
 
   const usersUrl = `${DOMAIN}/api/v1/users`;
   const groupsUrl = `${DOMAIN}/api/v1/groups`;
   const appsUrl = `${DOMAIN}/api/v1/apps`;
 
-  const config = {
-    clientId: '0oa15b5c0s76WBRdl0h8',
+  const c = {
+    clientId,
     issuer: DOMAIN,
-    redirectUri: `${window.location.origin}${BASENAME}/login/callback`,
+    redirectUri,
     scopes: [
       'openid',
       'profile',
@@ -37,7 +39,7 @@ const AdminView = () => {
     ],
   };
 
-  const localOktaAuth = new OktaAuth(config);
+  const localOktaAuth = new OktaAuth(c);
 
   useEffect(() => {
     if (!authState || !authState.isAuthenticated) {

@@ -5,6 +5,8 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
 import '../css/Admin.css';
 
+import config from "../config";
+
 const AdminCreate = () => {
   const { authState, oktaAuth } = useOktaAuth();
 
@@ -16,17 +18,17 @@ const AdminCreate = () => {
 
   const [message, setMessage] = useState('');
 
-  const BASENAME = process.env.PUBLIC_URL || '';
-  const DOMAIN = 'https://thecrownlands.game-of-thrones.us';
+  const {clientId, redirectUri, issuer} = config.oidc;
+  const DOMAIN = issuer.split("/oauth2")[0];
 
   const usersUrl = `${DOMAIN}/api/v1/users`;
   const groupsUrl = `${DOMAIN}/api/v1/groups`;
   const appsUrl = `${DOMAIN}/api/v1/apps`;
 
-  const config = {
-    clientId: '0oa15b5c0s76WBRdl0h8',
+  const c = {
+    clientId,
     issuer: DOMAIN,
-    redirectUri: `${window.location.origin}${BASENAME}/login/callback`,
+    redirectUri,
     scopes: [
       'openid',
       'profile',
@@ -37,7 +39,7 @@ const AdminCreate = () => {
     ],
   };
 
-  const localOktaAuth = new OktaAuth(config);
+  const localOktaAuth = new OktaAuth(c);
 
   useEffect(() => {}, [authState, oktaAuth]); // Update if authState changes
 
