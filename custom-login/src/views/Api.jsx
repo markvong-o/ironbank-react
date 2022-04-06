@@ -6,6 +6,8 @@ import { useOktaAuth } from '@okta/okta-react';
 
 import '../css/Api.css';
 
+import config from "../config";
+
 const Api = () => {
   const BASENAME = process.env.PUBLIC_URL || '';
   const { authState, oktaAuth } = useOktaAuth();
@@ -17,41 +19,24 @@ const Api = () => {
   const [error, setError] = useState(null);
 
   const ISSUER =
-    'https://thecrownlands.game-of-thrones.us/oauth2/aus15e1wayoqWUfq40h8';
+    'https://crownlands.game-of-thrones.us/oauth2/ausqbble225O9UEc8696';
+
+    const {clientId, redirectUri} = config.oidc;
 
   const localOktaAuth = new OktaAuth({
     issuer: ISSUER,
     scopes: scopes.split(' '),
-    clientId: '0oa15b5c0s76WBRdl0h8',
-    redirectUri: `${window.location.origin}${BASENAME}/login/callback`,
+    clientId,
+    redirectUri,
   });
 
   useEffect(() => {
-    if (!authState || !authState.isAuthenticated) {
-      // When user isn't authenticated, forget any user info
-    } else {
-      //   (async () => {
-      //     let res = null;
-      //     try {
-      //       res = await localOktaAuth.token.getWithoutPrompt();
-      //     } catch (err) {
-      //       setError(err.errorSummary);
-      //     }
-      //     if (res) {
-      //       setClaims(res.tokens.accessToken.claims);
-      //       setAccessToken(res.tokens.accessToken.accessToken);
-      //     }
-      //   })();
-    }
+    
   }, [authState, oktaAuth]); // Update if authState changes
 
   if (error) {
     return <div className="error">{error}</div>;
   }
-
-  //   if (!accessToken) {
-  //     return <div>Fetching access token...</div>;
-  //   }
 
   const callApi = async () => {
     if (api && accessToken) {
@@ -59,6 +44,7 @@ const Api = () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          'isOie': true
         },
       };
       let res = null;
