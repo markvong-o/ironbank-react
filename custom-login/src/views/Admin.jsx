@@ -4,12 +4,37 @@ import AdminView from './AdminView';
 import AdminCreate from './AdminCreate';
 import AdminCreateGroups from './AdminCreateGroups';
 import { Button } from 'semantic-ui-react';
+import { OktaAuth } from '@okta/okta-auth-js';
 import React, { useEffect, useState } from 'react';
+
+import config from "../config";
 
 const Admin = () => {
   let [view, setView] = useState(false);
   let [create, setCreate] = useState(false);
   let [createG, setCreateG] = useState(false);
+  const {clientId, issuer, redirectUri} = config.oidc;
+  const DOMAIN = issuer.split("/oauth2")[0];
+
+  const usersUrl = `${DOMAIN}/api/v1/users`;
+  const groupsUrl = `${DOMAIN}/api/v1/groups`;
+  const appsUrl = `${DOMAIN}/api/v1/apps`;
+
+  const c = {
+    clientId,
+    issuer: DOMAIN,
+    redirectUri,
+    scopes: [
+      'openid',
+      'profile',
+      'email',
+      'okta.users.manage',
+      'okta.groups.manage',
+      'okta.apps.manage',
+    ],
+  };
+
+  const localOktaAuth = new OktaAuth(c);
 
   return (
     <div>
