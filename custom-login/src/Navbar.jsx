@@ -29,10 +29,13 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     !err.errorCode &&
     err.xhr.message === 'Failed to fetch';
 
-  const login = async () => {
-    // history.push("/login");
+  const loginRedirect = async () => {
     oktaAuth.signInWithRedirect({ originalUri: '/' });
   };
+
+  const loginLocally = async () => {
+    history.push("/login");
+  }
 
   const logout = async () => {
     const basename =
@@ -134,7 +137,10 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
               </Menu.Item>
             )}
             {!authState.isPending && !authState.isAuthenticated && (
-              <Menu.Item onClick={login}>Login</Menu.Item>
+              <Menu.Item onClick={loginRedirect}>Login with Redirect</Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item onClick={loginLocally}>Login</Menu.Item>
             )}
           </div>
         </Container>

@@ -26,7 +26,7 @@ import Api from './views/Api';
 import Admin from './views/Admin';
 import CorsErrorModal from './CorsErrorModal';
 import AuthRequiredModal from './AuthRequiredModal';
-import "./App.css";
+import './App.css';
 
 const oktaAuth = new OktaAuth(config.oidc);
 
@@ -88,12 +88,6 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login/callback" component={LoginCallback} />
-          {/* <Route
-            path="/login/callback"
-            render={(props) => (
-              <LoginCallback />
-            )}
-          /> */}
           <Route
             path="/login"
             render={() => (
