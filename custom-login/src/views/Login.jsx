@@ -10,17 +10,40 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 /*eslint-disable*/
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
 import * as OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
-
+import { OktaAuth } from '@okta/okta-auth-js';
 import config from '../config';
 
 const Login = ({ setCorsErrorModalOpen }) => {
   const { oktaAuth } = useOktaAuth();
   const widgetRef = useRef();
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const updateUsername = (e) => {
+    setUsername(e.target.value);
+  }
+  const updatePassword = (e) => {
+    setPassword(e.target.value);
+  }
+  const signIn = async () => {
+    const { issuer, clientId, redirectUri } = config.oidc;
+    let auth = new OktaAuth({
+      clientId,
+      issuer: issuer.split('/oauth2')[0],
+      redirectUri,
+      scopes: ['openid', 'profile', 'email'],
+    })
+
+    const resp = await auth.signInWithCredentials({username, password});
+    if(resp.status === "SUCCESS") {
+      auth.session.setCookieAndRedirect(resp.sessionToken, "/");
+    }
+  }
   useEffect(() => {
     if (!widgetRef.current) {
       return false;
@@ -81,6 +104,10 @@ const Login = ({ setCorsErrorModalOpen }) => {
   return (
     <div>
       <div ref={widgetRef} />
+
+      {/* <input value={username} onChange={updateUsername} placeholder="Username"></input>
+      <input value={password} onChange={updatePassword} placeholder="Password" type="password"></input>
+      <button onClick={signIn}>Sign In</button> */}
     </div>
   );
 };
