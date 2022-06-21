@@ -1,0 +1,34 @@
+.header-img {
+    width: 100% !important;
+}
+
+body {
+    border: 1px black solid;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+body::after {
+    content: "";
+    background-image: url("../../public/bank.jpg");
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    /* background-color: black; */
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    z-index: -1;   
+  }
+
+#home-container {
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    height: 20rem;
+    color: white !important;
+    /* width: 100rem; */
+    /* border: 1px green solid; */
+}

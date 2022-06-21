@@ -13,7 +13,8 @@
 import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Header } from 'semantic-ui-react';
+import { Button, Header, Image } from 'semantic-ui-react';
+import "../css/Home.css"
 
 const Home = () => {
   const history = useHistory();
@@ -47,9 +48,9 @@ const Home = () => {
 
   return (
     <div id="home">
-      <div>
-        <Header as="h1">Welcome to the Iron Bank</Header>
-
+      <div id="home-container">
+        <h1>Welcome to the Iron Bank</h1>
+        {/* <Image size="large" src={`${process.env.PUBLIC_URL}/bank.jpg`} className="header-img"></Image> */}
         {authState.isAuthenticated && !userInfo && (
           <div>Loading user information...</div>
         )}
