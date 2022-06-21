@@ -71,7 +71,7 @@ const Applications = () => {
 
   if (apps.length === 0) {
     return (
-      <div>
+      <div id="fetching">
         <p>Fetching applications...</p>
       </div>
     );

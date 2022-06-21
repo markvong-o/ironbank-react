@@ -8,6 +8,7 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import React, { useEffect, useState } from 'react';
 
 import config from "../config";
+import "../css/Admin.css";
 
 const Admin = () => {
   let [view, setView] = useState(false);
@@ -37,7 +38,7 @@ const Admin = () => {
   const localOktaAuth = new OktaAuth(c);
 
   return (
-    <div>
+    <div id="admin-main-container">
       <Button.Group className="user-btn-grp" style={{ marginBottom: '3rem' }}>
         <Button
           onClick={() => {

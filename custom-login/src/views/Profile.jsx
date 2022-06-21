@@ -9,10 +9,11 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
+/*eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
 import { Header, Icon, Table } from 'semantic-ui-react';
+import "../css/Profile.css";
 
 const Profile = () => {
   const { authState, oktaAuth } = useOktaAuth();
@@ -33,14 +34,14 @@ const Profile = () => {
 
   if (!userInfo) {
     return (
-      <div>
+      <div id='fetching'>
         <p>Fetching user profile...</p>
       </div>
     );
   }
 
   return (
-    <div>
+    <div id='profile-container'>
       <div>
         <Header as="h1">
           <Icon name="drivers license" color="blue" />

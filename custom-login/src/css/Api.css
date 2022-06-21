@@ -30,6 +30,11 @@ button:hover {
     margin:0;
     /* border: 1px green solid; */
     /* height: 100vh; */
+    background: white;
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px white solid;
+    width: 100% !important;
 }
 
 #internal-container {

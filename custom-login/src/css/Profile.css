@@ -1,0 +1,9 @@
+#profile-container {
+    background: white;
+    padding: 3rem;
+    border-radius: 24px;
+}
+
+#fetching {
+    color: white;
+}

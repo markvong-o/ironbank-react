@@ -4,6 +4,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* border: 1px red solid; */
+    background: white;
+    /* height: 40rem; */
+    padding: 3rem;
+    border-radius: 24px;
 }
 
 ul {
@@ -34,4 +39,8 @@ img {
     object-fit: scale-down;
     width: 200px;
     height: 150px;
+}
+
+#fetching {
+    color: white;
 }

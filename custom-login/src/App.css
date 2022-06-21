@@ -46,7 +46,8 @@
 #main-container {
   margin: 6rem 0 0 0;
   padding: 0;
-  width: 100%;
+  /* width: 100vw !important; */
+  /* border: 5px green solid; */
   /* color: red !important; */
   font-family: var(--core-font);
   text-align: center;
