@@ -21,7 +21,12 @@ body::after {
     background-size: 100vw 100vh;
     z-index: -1;   
   }
-
+h1 {
+    font-size: 3.5rem !important;
+}
+.content-text {
+    font-size: 1.5rem !important;
+}
 #home-container {
     display:flex;
     flex-direction: column;

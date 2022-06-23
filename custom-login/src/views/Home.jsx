@@ -52,11 +52,11 @@ const Home = () => {
         <h1>Welcome to the Iron Bank</h1>
         {/* <Image size="large" src={`${process.env.PUBLIC_URL}/bank.jpg`} className="header-img"></Image> */}
         {authState.isAuthenticated && !userInfo && (
-          <div>Loading user information...</div>
+          <div className="content-text">Loading user information...</div>
         )}
 
         {authState.isAuthenticated && userInfo && (
-          <div>
+          <div className="content-text">
             <p id="welcome">
               Welcome, &nbsp;
               {userInfo.name}!
@@ -69,8 +69,8 @@ const Home = () => {
         )}
 
         {!authState.isAuthenticated && (
-          <div>
-            <p>Login to view your profile.</p>
+          <div className="content-text">
+            <p>Log in to view your profile.</p>
             {/* <Button id="login-button" primary onClick={login}>
               Login
             </Button> */}
