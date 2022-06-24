@@ -8,7 +8,7 @@ textarea, pre {
   color: yellow;
   white-space: pre-wrap;
   word-wrap: break-word;
-  height: 100%;
+  min-height: 100% !important;
   margin: 0;
   font-size: 14px;
   text-align: left;
@@ -28,49 +28,70 @@ button:hover {
 #main-api-container{
     padding:0;
     margin:0;
-    /* border: 1px green solid; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 5px green solid !important; */
     /* height: 100vh; */
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     padding: 3rem;
     border-radius: 24px;
     border: 1px white solid;
-    width: 100% !important;
+    /* width: 100% !important; */
+    min-height: 100vh !important;
+    min-width: 60%;
 }
 
 #internal-container {
     padding:0;
     margin:0;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    min-height: 100% !important;
+    /* display: flex;
+    flex-direction: column; */
     align-items: center;
+    /* border: 3px yellow solid; */
 }
 
 #main-token-container {
     margin: 0;
     display: flex;
     /* width: 100%; */
-    /* height: 100%; */
-    flex-wrap:wrap;
+    min-height: 100% !important;
+    /* flex-wrap:wrap; */
     flex-direction: column;
     text-align: left;
+    /* border: 3px red solid; */
 }
 
 #get-token-container {
     min-width: max-content;
-    max-width: 60%;
-    /* border: 1px green solid; */
+    /* max-width: 100%; */
+    /* width: 100% !important; */
+    min-height: 100% !important;
     display: flex;
     flex-direction: column;
+    font-size: 1.6rem;
+    /* border: 1px red solid; */
+    text-align: left;
 }
+
+#get-token-container > * {
+    margin: 1rem;
+}
+
+#get-token-container > button {
+    align-self: center;
+}
+
 #inner-token-container {
     display: grid;
     grid-template-areas:
         "a b";
         grid-template-columns: 50%;
-    height: max-content;
+        min-height: 100% !important;
     /* border: 1px black solid; */
-    width: max-content;
+    /* width: max-content; */
     margin: 1.2rem 0;
 }
 

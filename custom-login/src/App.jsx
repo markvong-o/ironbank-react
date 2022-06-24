@@ -79,28 +79,30 @@ const App = () => {
       onAuthRequired={customAuthHandler}
       restoreOriginalUri={restoreOriginalUri}
     >
-      <Navbar {...{ setCorsErrorModalOpen }} />
-      <CorsErrorModal {...{ corsErrorModalOpen, setCorsErrorModalOpen }} />
-      <AuthRequiredModal
-        {...{ authRequiredModalOpen, setAuthRequiredModalOpen, triggerLogin }}
-      />
-      <Container id="main-container">
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login/callback" component={LoginCallback} />
-          <Route
-            path="/login"
-            render={() => (
-              <CustomLoginComponent {...{ setCorsErrorModalOpen }} />
-            )}
-          />
-          <SecureRoute path="/messages" component={Messages} />
-          <SecureRoute path="/profile" component={Profile} />
-          <SecureRoute path="/apps" component={Applications} />
-          <SecureRoute path="/balance" component={Api} />
-          <SecureRoute path="/admin" component={Admin} />
-        </Switch>
-      </Container>
+      <div id="security-container">
+        <Navbar {...{ setCorsErrorModalOpen }} />
+        <CorsErrorModal {...{ corsErrorModalOpen, setCorsErrorModalOpen }} />
+        <AuthRequiredModal
+          {...{ authRequiredModalOpen, setAuthRequiredModalOpen, triggerLogin }}
+        />
+        <Container id="main-container">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/login/callback" component={LoginCallback} />
+            <Route
+              path="/login"
+              render={() => (
+                <CustomLoginComponent {...{ setCorsErrorModalOpen }} />
+              )}
+            />
+            <SecureRoute path="/messages" component={Messages} />
+            <SecureRoute path="/profile" component={Profile} />
+            <SecureRoute path="/apps" component={Applications} />
+            <SecureRoute path="/balance" component={Api} />
+            <SecureRoute path="/admin" component={Admin} />
+          </Switch>
+        </Container>
+      </div>
     </Security>
   );
 };

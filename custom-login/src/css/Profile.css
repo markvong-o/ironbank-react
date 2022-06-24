@@ -1,7 +1,9 @@
 #profile-container {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     padding: 3rem;
     border-radius: 24px;
+    min-height: 100vh !important;
+    min-width: 60%;
 }
 
 #fetching {

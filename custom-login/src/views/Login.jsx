@@ -16,21 +16,21 @@ import * as OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import { OktaAuth } from '@okta/okta-auth-js';
 import config from '../config';
-import "../css/Login.css";
+import '../css/Login.css';
 
 const Login = ({ setCorsErrorModalOpen }) => {
   const { oktaAuth } = useOktaAuth();
   const widgetRef = useRef();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
-  }
+  };
   const updatePassword = (e) => {
     setPassword(e.target.value);
-  }
+  };
   const signIn = async () => {
     const { issuer, clientId, redirectUri } = config.oidc;
     let auth = new OktaAuth({
@@ -38,19 +38,20 @@ const Login = ({ setCorsErrorModalOpen }) => {
       issuer: issuer.split('/oauth2')[0],
       redirectUri,
       scopes: ['openid', 'profile', 'email'],
-    })
+    });
 
-    const resp = await auth.signInWithCredentials({username, password});
-    if(resp.status === "SUCCESS") {
-      auth.session.setCookieAndRedirect(resp.sessionToken, "/");
+    const resp = await auth.signInWithCredentials({ username, password });
+    if (resp.status === 'SUCCESS') {
+      auth.session.setCookieAndRedirect(resp.sessionToken, '/');
     }
-  }
+  };
   useEffect(() => {
     if (!widgetRef.current) {
       return false;
     }
 
-    const { issuer, clientId, redirectUri, scopes, useInteractionCode } = config.oidc;
+    const { issuer, clientId, redirectUri, scopes, useInteractionCode } =
+      config.oidc;
     const widget = new OktaSignIn({
       /**
        * Note: when using the Sign-In Widget for an OIDC flow, it still
@@ -72,12 +73,12 @@ const Login = ({ setCorsErrorModalOpen }) => {
         scopes,
       },
       useInteractionCodeFlow: useInteractionCode, // Set to true, if your org is OIE enabled
-      features:{
-        idpDiscovery: true
+      features: {
+        idpDiscovery: true,
       },
       idpDiscovery: {
-        requestContext: window.location.origin
-      }
+        requestContext: window.location.origin,
+      },
     });
 
     widget.renderEl(
@@ -87,11 +88,11 @@ const Login = ({ setCorsErrorModalOpen }) => {
       },
       (err) => {
         throw err;
-      },
+      }
     );
 
     // Note: Can't distinguish CORS error from other network errors
-    const isCorsError = (err) => (err.name === 'AuthApiError' && !err.statusCode);
+    const isCorsError = (err) => err.name === 'AuthApiError' && !err.statusCode;
 
     widget.on('afterError', (_context, error) => {
       if (isCorsError(error)) {
@@ -103,12 +104,13 @@ const Login = ({ setCorsErrorModalOpen }) => {
   }, [oktaAuth]);
 
   return (
-    <div>
-      <div ref={widgetRef} />
-
-      {/* <input value={username} onChange={updateUsername} placeholder="Username"></input>
-      <input value={password} onChange={updatePassword} placeholder="Password" type="password"></input>
-      <button onClick={signIn}>Sign In</button> */}
+    <div id="content">
+      <div id="left-content">
+        <p>Test this out</p>
+      </div>
+      <div id="right-content">
+        <div ref={widgetRef} />
+      </div>
     </div>
   );
 };

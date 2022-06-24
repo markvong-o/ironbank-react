@@ -10,13 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-body {
+body, html, #root {
   margin: 0;
   padding: 0;
-  
-}
-
-#root {
-  margin: 0;
-  padding: 0;
+  min-height: 100% !important;
 }

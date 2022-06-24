@@ -17,7 +17,7 @@ import { Header, Icon, Table } from 'semantic-ui-react';
 import { getTokenSourceMapRange } from 'typescript';
 import '../css/Applications.css';
 
-import config from "../config";
+import config from '../config';
 
 const Applications = () => {
   const { authState, oktaAuth } = useOktaAuth();
@@ -25,14 +25,14 @@ const Applications = () => {
   const [apps, setApps] = useState([]);
 
   useEffect(() => {
-    const {clientId, issuer, redirectUri} = config.oidc;
-    const baseUrl = issuer.split("/oauth2")[0];
+    const { clientId, issuer, redirectUri } = config.oidc;
+    const baseUrl = issuer.split('/oauth2')[0];
     const c = {
       clientId,
       issuer: baseUrl,
       redirectUri,
-      scopes: ['openid', 'profile', 'email', 'okta.users.read.self']
-    }
+      scopes: ['openid', 'profile', 'email', 'okta.users.read.self'],
+    };
     const localOktaAuth = new OktaAuth(c);
 
     if (!authState || !authState.isAuthenticated) {
@@ -43,8 +43,7 @@ const Applications = () => {
         const tokens = await localOktaAuth.token.getWithoutPrompt();
         const accessToken = tokens.tokens.accessToken.accessToken;
 
-        const url =
-          `${baseUrl}/api/v1/users/me/appLinks`;
+        const url = `${baseUrl}/api/v1/users/me/appLinks`;
         const app_options = {
           method: 'GET',
           headers: {
@@ -78,28 +77,28 @@ const Applications = () => {
   }
 
   return (
-    <div>
-      <div id="main-app-container">
-        <Header as="h1">
-          <Icon name="medapps" color="teal" /> My Applications{' '}
-        </Header>
-        <p>Below are the applications you have access to.</p>
+    // <div>
+    <div id="main-app-container">
+      <Header as="h1">
+        <Icon name="medapps" color="teal" /> My Applications{' '}
+      </Header>
+      <p>Below are the applications you have access to.</p>
 
-        <ul>
-          {apps.length > 0 &&
-            apps.map((app) => {
-              // console.log(app);
-              return (
-                <li key={app.id}>
-                  <a href={app.linkUrl} target="_blank">
-                    <img src={app.logoUrl} />
-                  </a>
-                </li>
-              );
-            })}
-        </ul>
-      </div>
+      <ul>
+        {apps.length > 0 &&
+          apps.map((app) => {
+            // console.log(app);
+            return (
+              <li key={app.id}>
+                <a href={app.linkUrl} target="_blank">
+                  <img src={app.logoUrl} />
+                </a>
+              </li>
+            );
+          })}
+      </ul>
     </div>
+    // </div>
   );
 };
 
