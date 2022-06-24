@@ -1,7 +1,6 @@
 textarea, pre {
   width: 100%;
   text-overflow: wrap;
-  /* height: 300px; */
   padding: 10px;
   resize: none;
   background-color: black;
@@ -31,13 +30,10 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 5px green solid !important; */
-    /* height: 100vh; */
     background: rgba(255, 255, 255, 0.9);
     padding: 3rem;
     border-radius: 24px;
     border: 1px white solid;
-    /* width: 100% !important; */
     min-height: 100vh !important;
     min-width: 60%;
 }
@@ -47,32 +43,23 @@ button:hover {
     margin:0;
     width: 100%;
     min-height: 100% !important;
-    /* display: flex;
-    flex-direction: column; */
     align-items: center;
-    /* border: 3px yellow solid; */
 }
 
 #main-token-container {
     margin: 0;
     display: flex;
-    /* width: 100%; */
     min-height: 100% !important;
-    /* flex-wrap:wrap; */
     flex-direction: column;
     text-align: left;
-    /* border: 3px red solid; */
 }
 
 #get-token-container {
     min-width: max-content;
-    /* max-width: 100%; */
-    /* width: 100% !important; */
     min-height: 100% !important;
     display: flex;
     flex-direction: column;
     font-size: 1.6rem;
-    /* border: 1px red solid; */
     text-align: left;
 }
 
@@ -90,8 +77,6 @@ button:hover {
         "a b";
         grid-template-columns: 50%;
         min-height: 100% !important;
-    /* border: 1px black solid; */
-    /* width: max-content; */
     margin: 1.2rem 0;
 }
 
@@ -105,16 +90,13 @@ button:hover {
 .data-container {
     display:flex;
     flex-direction: column;
-    /* border: 1px blue solid; */
     margin: 1rem;
 }
 
 #api-container {
-    /* width: 100%; */
     min-width: max-content;
     max-width: 60%;
     margin: 1rem;
-    /* border: 1px red solid; */
     text-align: left;
 }
 
@@ -124,7 +106,6 @@ button:hover {
 }
 
 input {
-    /* width: 50%; */
     padding: 5px;
 }
 

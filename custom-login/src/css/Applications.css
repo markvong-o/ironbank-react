@@ -1,28 +1,19 @@
 #main-app-container {
-    /* border: 1px green solid; */
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
-    /* border: 1px red solid; */
     background: rgba(255, 255, 255, 0.9);
-    /* height: 40rem; */
     padding: 3rem;
     border-radius: 24px;
     min-height: 100vh !important;
 }
 
 ul {
-    /* border: 1px red solid; */
     list-style-type: none;
     display: flex;
-    /* width: 60vw; */
-    /* justify-content: center;
-    align-items: center; */
     padding: 0;
     margin: 1.6rem;
     flex-wrap: wrap;
-    /* height: 100%; */
 }
 
 li {

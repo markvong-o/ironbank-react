@@ -1,7 +1,6 @@
 #admin-main-container  {
     display: flex;
     flex-direction: column;
-    /* border: 1px red solid; */
     min-width: 60%;
     justify-items: center;
     align-items: center;
@@ -12,28 +11,21 @@
 }
 
 #all-users-container {
-    /* width: 50%; */
     height: 100%;
-    /* border: 1px yellow solid; */
     
 }
 
 #curr-user-div {
-    /* width: 50%; */
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* border: 1px green solid; */
-    /* margin-left: 2rem; */
 }
 
 .user-btn-grp, .grp-btn-grp, .apps-btn-grp {
     display: flex;
     flex-wrap: wrap;
-    /* border: 1px red solid; */
 }
 .apps-btn-grp, .grp-btn-grp {
-    /* border: 1px red solid; */
     width: 100%;
     height: 50%;
     overflow-y: scroll;
@@ -50,7 +42,6 @@
   }
 
 #user-info-container {
-    /* border: 1px green solid; */
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -58,15 +49,12 @@
 }
 
 #groups-container {
-    /* border: 1px red solid; */
     width: 49%;
     height: 50%;
 }
 
 #apps-container {
-    /* border: 1px blue solid; */
     width: 49%;
-    /* height: 50% !important; */
 }
 
 .user-btn {
@@ -77,11 +65,7 @@
 .info-btn {
     margin: 0.3rem !important;
     width: 50% !important;
-    /* width: max-content !important; */
-    /* text-align: center !important; */
-    /* padding: 4px !important; */
     text-overflow: ellipsis !important;
-    /* white-space: normal !important; */
 
 }
 

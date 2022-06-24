@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Monda&display=swap');
 :root {
     --core-font: 'Monda', serif;
+    --core-color: #0975A5;
 }
 #okta-sign-in * {
     color: white !important;
@@ -17,12 +18,10 @@
 #okta-sign-in .okta-form-title {
     font-weight: 1000px !important;
     font-size: 1.1rem !important;
-    /* color: white !important; */
 }
 
 #okta-sign-in .auth-content {
     font-family: var(--core-font);
-    /* color: white !important; */
     width: 100% !important;
     height: 100%;
 }
@@ -31,11 +30,7 @@
 #okta-sign-in.auth-container.main-container {
     border-radius: 16px;
     background-color: #1B1C1D;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    
+    margin-top: 0;
 }
 
 #okta-sign-in .o-form .o-form-input .o-form-control {
@@ -55,7 +50,8 @@
     align-items: center;
     margin: 0 !important;
     padding: 0 !important;
-    height: 100% !important;
+    min-height: 90vh !important;
+    width: 100%;
   }
   
   #left-content {
@@ -63,19 +59,35 @@
     flex-direction: column;
     align-items: center;
     width: 50%;
-    height: 100%;
+    min-height: 100% !important;
+    color: white !important;
+  }
+
+  #left-content > ul {
+      display: flex;
+      flex-direction: column;
+      margin-top: 0;
+      font-size: 1.2rem;
+  }
+
+  #title {
+      font-size: 2.6rem;
+      font-weight:bold;
+  }
+
+  .text {
+      font-size: 1.6rem;
   }
   
+  .brand, li {
+      color: var(--core-color);
+  }
+
   #right-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100% !important;
+    min-height: 100% !important;
     width: 50%;
-  }
-
-  #right-content > * {
-      width: 100% !important;
-      height: 100% !important;
   }
