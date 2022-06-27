@@ -4,7 +4,7 @@
     --core-color: #0975A5;
 }
 #okta-sign-in * {
-    color: white !important;
+    /* color: white !important; */
 }
 
 #okta-sign-in .o-form .input-fix input[type=number], #okta-sign-in .o-form .input-fix input[type=password], #okta-sign-in .o-form .input-fix input[type=tel], #okta-sign-in .o-form .input-fix input[type=text], #okta-sign-in .o-form .input-fix input[type=textbox] {
@@ -29,7 +29,7 @@
 
 #okta-sign-in.auth-container.main-container {
     border-radius: 16px;
-    background-color: #1B1C1D;
+    /* background-color: #1B1C1D; */
     margin-top: 0;
 }
 
