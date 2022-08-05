@@ -12,7 +12,7 @@
 /*eslint-disable*/
 import React, { useEffect, useRef, useState } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
-import * as OktaSignIn from '@okta/okta-signin-widget';
+import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import { OktaAuth } from '@okta/okta-auth-js';
 import config from '../config';
