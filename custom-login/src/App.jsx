@@ -88,6 +88,7 @@ const App = () => {
         <Container id="main-container">
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/api/login" component = {triggerLogin} />
             <Route path="/login/callback" component={LoginCallback} />
             <Route
               path="/login"
