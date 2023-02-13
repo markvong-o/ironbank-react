@@ -15,9 +15,9 @@
     "text-encoding": "0.7.0"
   },
   "scripts": {
-    "start": "cross-env PORT=8080 react-app-rewired start",
+    "start": "cross-env PORT=8080 react-scripts start",
     "start:browser:none": "BROWSER=none yarn start",
-    "build": "react-app-rewired build",
+    "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc.json --ext .js --ext .jsx src/"
