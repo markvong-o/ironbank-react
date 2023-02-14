@@ -5,6 +5,7 @@ export default async function checkAdmin(req, res) {
 
   const allowedOrigins = [
     'http://localhost:8080',
+    'http://localhost:3000',
     'https://ironbank.mark-vong.com',
   ];
 

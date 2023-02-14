@@ -7,15 +7,15 @@ import { Button } from 'semantic-ui-react';
 import { OktaAuth } from '@okta/okta-auth-js';
 import React, { useEffect, useState } from 'react';
 
-import config from "../config";
-import "../css/Admin.css";
+import config from '../config';
+import '../css/Admin.css';
 
 const Admin = () => {
   let [view, setView] = useState(false);
   let [create, setCreate] = useState(false);
   let [createG, setCreateG] = useState(false);
-  const {clientId, issuer, redirectUri} = config.oidc;
-  const DOMAIN = issuer.split("/oauth2")[0];
+  const { clientId, issuer, redirectUri } = config.oidc;
+  const DOMAIN = issuer.split('/oauth2')[0];
 
   const usersUrl = `${DOMAIN}/api/v1/users`;
   const groupsUrl = `${DOMAIN}/api/v1/groups`;
@@ -76,7 +76,9 @@ const Admin = () => {
         <Button
           onClick={() => {
             window.open(
-              'https://crownlands.game-of-thrones.us/home/admin-entry',
+              `${
+                process.env.REACT_APP_ISSUER.split('/oauth2')[0]
+              }/home/admin-entry`,
               '_blank'
             );
           }}
