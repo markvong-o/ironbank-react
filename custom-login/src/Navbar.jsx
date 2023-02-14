@@ -64,10 +64,9 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
 
     const checkAdmin = async () => {
       let user = await oktaAuth.getUser();
-      let url = 'https://okta-custom-api.glitch.me/verifyAdmin';
+      let url = `${process.env.PUBLIC_URL}/api/checkAdmin`;
       let data = {
-        uid: user.sub,
-        isOie: true,
+        uid: user.sub
       };
       const options = {
         method: 'POST',
