@@ -15,11 +15,11 @@ const Api = () => {
   const [accessToken, setAccessToken] = useState(null);
   const [claims, setClaims] = useState(null);
   const [response, setResponse] = useState(null);
-  const [api, setApi] = useState('https://okta-custom-api.glitch.me/balance');
+  const [api, setApi] = useState(`${process.env.REACT_APP_API_URL}/api/bankBalance`);
   const [error, setError] = useState(null);
 
   const ISSUER =
-    'https://crownlands.game-of-thrones.us/oauth2/ausqbble225O9UEc8696';
+    `${process.env.REACT_APP_ISSUER.split("/oauth2")[0]}/oauth2/ausqbble225O9UEc8696`;
 
     const {clientId, redirectUri} = config.oidc;
 
@@ -44,7 +44,6 @@ const Api = () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'isOie': true
         },
       };
       let res = null;

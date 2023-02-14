@@ -64,7 +64,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
 
     const checkAdmin = async () => {
       let user = await oktaAuth.getUser();
-      let url = `${process.env.PUBLIC_URL}/api/checkAdmin`;
+      let url = `${process.env.REACT_APP_API_URL}/api/checkAdmin`;
       let data = {
         uid: user.sub
       };
