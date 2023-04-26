@@ -1,4 +1,5 @@
 const OktaJwtVerifier = require('@okta/jwt-verifier');
+import { allowCors } from './helpers/cors';
 
 const jwtVerifier = new OktaJwtVerifier({
   issuer: 'https://okta.mark-vong.com/oauth2/ausqbble225O9UEc8696',
@@ -7,27 +8,7 @@ const jwtVerifier = new OktaJwtVerifier({
   },
 });
 
-export default async function bankBalance(req, res) {
-  const origin = req.headers.origin;
-
-  const allowedOrigins = [
-    'http://localhost:8080',
-    'http://localhost:3000',
-    'https://ironbank.mark-vong.com',
-  ];
-
-  if (origin && allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
-  );
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-  //   res.setHeader('Access-Control-Allow-Credentials', true);
+async function bankBalance(req, res) {
   const authHeader = req.headers.authorization || null;
   const match = authHeader ? authHeader.match(/Bearer (.+)/) : null;
   const expectedAudience = 'api://iron-bank';
@@ -60,3 +41,5 @@ export default async function bankBalance(req, res) {
   }
   res.send({});
 }
+
+module.exports = allowCors(bankBalance);

@@ -1,22 +1,7 @@
 const fetch = require('node-fetch');
+import { allowCors } from './helpers/cors';
 
-export default async function checkAdmin(req, res) {
-  const origin = req.headers.origin;
-
-  const allowedOrigins = [
-    'http://localhost:8080',
-    'http://localhost:3000',
-    'https://ironbank.mark-vong.com',
-  ];
-
-  if (origin && allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+async function checkAdmin(req, res) {
   let resp = {};
   let roles = {};
   let options = {};
@@ -44,3 +29,5 @@ export default async function checkAdmin(req, res) {
   }
   res.send(resp);
 }
+
+module.exports = allowCors(checkAdmin);
