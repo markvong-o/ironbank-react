@@ -15,7 +15,7 @@ async function bankBalance(req, res) {
   if (!match) {
     return res.status(401).send('Not authorized');
   }
-
+  
   const accessToken = match[1];
 
   let balance = { balance: 50, institution: 'Iron Bank' };
