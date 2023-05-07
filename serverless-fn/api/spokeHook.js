@@ -51,7 +51,7 @@ async function spokeHook(req, res) {
             value: `${user.lastName}`,
           },
           {
-            op: 'add',
+            op: 'replace',
             path: '/claims/email',
             value: `${user.email}`,
           },
