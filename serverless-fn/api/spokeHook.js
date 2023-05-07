@@ -15,7 +15,7 @@ async function spokeHook(req, res) {
   const spoke = user_spoke[1];
   const domain = spokes[spoke].domain;
 
-  console.log(domain);
+//   console.log(domain);
 
   let options = {
     method: 'GET',
@@ -35,6 +35,8 @@ async function spokeHook(req, res) {
     console.log(e);
   }
 
+  const {firstName, lastName, login, email} = user.profile;
+
   let commands = {
     commands: [
       {
@@ -43,22 +45,22 @@ async function spokeHook(req, res) {
           {
             op: 'add',
             path: '/claims/firstName',
-            value: `${user.firstName}`,
+            value: `${firstName}`,
           },
           {
             op: 'add',
             path: '/claims/lastName',
-            value: `${user.lastName}`,
+            value: `${lastName}`,
           },
           {
             op: 'replace',
             path: '/claims/email',
-            value: `${user.email}`,
+            value: `${email}`,
           },
           {
             op: 'add',
             path: '/claims/login',
-            value: `${user.login}`,
+            value: `${login}`,
           },
         ],
       },

@@ -13,7 +13,7 @@
 import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Container, Image, Menu } from 'semantic-ui-react';
+import { Container, Image, Menu, Dropdown } from 'semantic-ui-react';
 import { OktaAuth } from '@okta/okta-auth-js';
 import config from './config';
 
@@ -34,8 +34,8 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   };
 
   const loginLocally = async () => {
-    history.push("/login");
-  }
+    history.push('/login');
+  };
 
   const logout = async () => {
     const basename =
@@ -66,7 +66,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
       let user = await oktaAuth.getUser();
       let url = `${process.env.REACT_APP_API_URL}/api/checkAdmin`;
       let data = {
-        uid: user.sub
+        uid: user.sub,
       };
       const options = {
         method: 'POST',
@@ -89,6 +89,14 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   if (!authState) {
     return null;
   }
+
+  const nav = (region) => {
+    if (region === 'US') {
+      window.location.href = 'https://classic.mark-vong.com';
+    } else {
+      window.location.href = 'https://okta.mark-vong.com';
+    }
+  };
 
   return (
     <div>
@@ -136,11 +144,21 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
               </Menu.Item>
             )}
             {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item>
+                <Dropdown text="Region">
+                  <Dropdown.Menu>
+                    <Dropdown.Item text="US" onClick={() => nav('US')} />
+                    <Dropdown.Item text="EU" onClick={() => nav('EU')} />
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Menu.Item>
+            )}
+            {/* {!authState.isPending && !authState.isAuthenticated && (
               <Menu.Item onClick={loginRedirect}>Login with Redirect</Menu.Item>
             )}
             {!authState.isPending && !authState.isAuthenticated && (
               <Menu.Item onClick={loginLocally}>Login</Menu.Item>
-            )}
+            )} */}
           </div>
         </Container>
       </Menu>
