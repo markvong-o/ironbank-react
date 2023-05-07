@@ -24,11 +24,9 @@ const Profile = () => {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);
     } else {
-      oktaAuth.getUser().then((info) => {
-        setUserInfo(info);
-      }).catch((err) => {
-        console.error(err);
-      });
+      const idToken = oktaAuth.getIdToken();
+      const decodedIdToken = oktaAuth.token.decode(idToken);
+      setUserInfo(decodedIdToken.payload);
     }
   }, [authState, oktaAuth]); // Update if authState changes
 
