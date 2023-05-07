@@ -4,26 +4,33 @@ import { allowCors } from './helpers/cors';
 const api_key = '00TNuJA9l-fSQjSj4_Gzgml7oUiacOwkmWnFvu-Ciu';
 
 const spokes = {
-  us: {
-    domain: 'udp-got-corp-d0f',
+  "us.spoke": {
+    domain: 'udp-gotcorp-d0f.oktapreview.com',
   },
 };
 async function spokeHook(req, res) {
-  let results = null;
-  const uid = req.body.data.context.user.id;
+  let user = null;
+  const user_spoke = req.body.data.context.user.profile.login.split("@");
+  const uid = user_spoke[0];
+  const spoke = user_spoke[1];
+  const domain = spokes[spoke].domain;
+
+  console.log(domain);
 
   let options = {
     method: 'GET',
     headers: {
+        'Content-Type':'application/json',
       Authorization: `SSWS ${api_key}`,
     },
   };
 
   try {
-    results = await fetch(
-      `https://udp-gotcorp-d0f.okta.com/api/v1/users/${uid}`,
+    user = await fetch(
+      `https://${domain}/api/v1/users/${uid}`,
       options
     );
+    user = await user.json();
   } catch (e) {
     console.log(e);
   }
@@ -36,13 +43,28 @@ async function spokeHook(req, res) {
           {
             op: 'add',
             path: '/claims/firstName',
-            value: 'placeholderFirstName',
+            value: `${user.firstName}`,
+          },
+          {
+            op: 'add',
+            path: '/claims/lastName',
+            value: `${user.lastName}`,
+          },
+          {
+            op: 'add',
+            path: '/claims/email',
+            value: `${user.email}`,
+          },
+          {
+            op: 'add',
+            path: '/claims/login',
+            value: `${user.login}`,
           },
         ],
       },
     ],
   };
-  console.log(results);
+  
 
   res.send(commands);
 }
