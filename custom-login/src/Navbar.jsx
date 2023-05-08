@@ -92,9 +92,9 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
 
   const nav = (region) => {
     if (region === 'US') {
-      window.location.href = 'https://classic.mark-vong.com';
-    } else {
-      window.location.href = 'https://okta.mark-vong.com';
+      window.location.href = 'https://us.mark-vong.com';
+    } else if(region === 'EU') {
+      window.location.href = 'https://eu.mark-vong.com';
     }
   };
 

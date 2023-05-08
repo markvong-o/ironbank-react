@@ -1,12 +1,19 @@
 const fetch = require('node-fetch');
 import { allowCors } from './helpers/cors';
 
-const api_key = '00TNuJA9l-fSQjSj4_Gzgml7oUiacOwkmWnFvu-Ciu';
+const us_api_key = '00TNuJA9l-fSQjSj4_Gzgml7oUiacOwkmWnFvu-Ciu';
+
+const eu_api_key = '00yTw_ZiHzbMC_yD0sKBJHs_0OR4F9SMoYW296hc85';
 
 const spokes = {
   "us.spoke": {
     domain: 'udp-gotcorp-d0f.oktapreview.com',
+    api_key: '00TNuJA9l-fSQjSj4_Gzgml7oUiacOwkmWnFvu-Ciu'
   },
+  "eu.spoke": {
+    domain: 'gameofthrones-ext.okta.com',
+    api_key: '00yTw_ZiHzbMC_yD0sKBJHs_0OR4F9SMoYW296hc85'
+  }
 };
 async function spokeHook(req, res) {
   let user = null;
@@ -14,8 +21,7 @@ async function spokeHook(req, res) {
   const uid = user_spoke[0];
   const spoke = user_spoke[1];
   const domain = spokes[spoke].domain;
-
-//   console.log(domain);
+  const api_key = spokes[spoke].api_key;
 
   let options = {
     method: 'GET',
