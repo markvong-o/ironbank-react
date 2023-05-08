@@ -40,15 +40,26 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   const logout = async () => {
     const basename =
       window.location.origin + history.createHref({ pathname: '/' });
-    try {
-      await oktaAuth.signOut({ postLogoutRedirectUri: basename });
-    } catch (err) {
-      if (isCorsError(err)) {
-        setCorsErrorModalOpen(true);
-      } else {
-        throw err;
-      }
-    }
+    const idToken = oktaAuth.getIdToken();
+    const decodedIdToken = oktaAuth.token.decode(idToken);
+    let region = decodedIdToken.payload['region'];
+    let url =
+      region === 'US'
+        ? `https://us.mark-vong.com/login/signout`
+        : `https://eu.mark-vong.com/login/signout`;
+
+    // url = `${url}&post_logout_redirect_uri=https://ironbank.vercel.app`;
+    oktaAuth.tokenManager.clear();
+    window.location.href = `https://okta.mark-vong.com/oauth2/default/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${url}&fromURI=${basename}`;
+    // try {
+    //   await oktaAuth.signOut({ postLogoutRedirectUri: url });
+    // } catch (err) {
+    //   if (isCorsError(err)) {
+    //     setCorsErrorModalOpen(true);
+    //   } else {
+    //     throw err;
+    //   }
+    // }
   };
 
   useEffect(() => {
@@ -93,7 +104,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   const nav = (region) => {
     if (region === 'US') {
       window.location.href = 'https://us.mark-vong.com';
-    } else if(region === 'EU') {
+    } else if (region === 'EU') {
       window.location.href = 'https://eu.mark-vong.com';
     }
   };
