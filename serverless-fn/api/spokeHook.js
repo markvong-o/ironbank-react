@@ -41,7 +41,7 @@ async function spokeHook(req, res) {
     console.log(e);
   }
 
-  const {firstName, lastName, login, email} = user.profile;
+  const {firstName, lastName, login, email, region} = user.profile;
 
   let commands = {
     commands: [
@@ -67,6 +67,11 @@ async function spokeHook(req, res) {
             op: 'add',
             path: '/claims/login',
             value: `${login}`,
+          },
+          {
+            op: 'add',
+            path: '/claims/region',
+            value: `${region}`,
           },
         ],
       },
