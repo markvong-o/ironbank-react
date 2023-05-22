@@ -37,29 +37,35 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     history.push('/login');
   };
 
-  const logout = async () => {
-    const basename =
-      window.location.origin + history.createHref({ pathname: '/' });
-    const idToken = oktaAuth.getIdToken();
-    const decodedIdToken = oktaAuth.token.decode(idToken);
-    let region = decodedIdToken.payload['region'];
-    let url =
-      region === 'US'
-        ? `https://us.mark-vong.com/login/signout`
-        : `https://eu.mark-vong.com/login/signout`;
+  // For hub spoke - region
+  // const logout = async () => {
+  //   const basename =
+  //     window.location.origin + history.createHref({ pathname: '/' });
+  //   const idToken = oktaAuth.getIdToken();
+  //   const decodedIdToken = oktaAuth.token.decode(idToken);
+  //   let region = decodedIdToken.payload['region'];
+  //   let url =
+  //     region === 'US'
+  //       ? `https://us.mark-vong.com/login/signout`
+  //       : `https://eu.mark-vong.com/login/signout`;
 
-    // url = `${url}&post_logout_redirect_uri=https://ironbank.vercel.app`;
-    oktaAuth.tokenManager.clear();
-    window.location.href = `https://okta.mark-vong.com/oauth2/default/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${url}&fromURI=${basename}`;
-    // try {
-    //   await oktaAuth.signOut({ postLogoutRedirectUri: url });
-    // } catch (err) {
-    //   if (isCorsError(err)) {
-    //     setCorsErrorModalOpen(true);
-    //   } else {
-    //     throw err;
-    //   }
-    // }
+  //   // url = `${url}&post_logout_redirect_uri=https://ironbank.vercel.app`;
+  //   oktaAuth.tokenManager.clear();
+  //   window.location.href = `https://okta.mark-vong.com/oauth2/default/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${url}&fromURI=${basename}`;
+
+  // };
+
+  // Regular logout
+  const logout = async () => {
+    try {
+      await oktaAuth.signOut({ postLogoutRedirectUri: url });
+    } catch (err) {
+      if (isCorsError(err)) {
+        setCorsErrorModalOpen(true);
+      } else {
+        throw err;
+      }
+    }
   };
 
   useEffect(() => {
@@ -154,7 +160,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                 Logout
               </Menu.Item>
             )}
-            {!authState.isPending && !authState.isAuthenticated && (
+            {/* {!authState.isPending && !authState.isAuthenticated && (
               <Menu.Item>
                 <Dropdown text="Region">
                   <Dropdown.Menu>
@@ -163,13 +169,13 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Menu.Item>
-            )}
-            {/* {!authState.isPending && !authState.isAuthenticated && (
+            )} */}
+            {!authState.isPending && !authState.isAuthenticated && (
               <Menu.Item onClick={loginRedirect}>Login with Redirect</Menu.Item>
             )}
             {!authState.isPending && !authState.isAuthenticated && (
               <Menu.Item onClick={loginLocally}>Login</Menu.Item>
-            )} */}
+            )}
           </div>
         </Container>
       </Menu>
