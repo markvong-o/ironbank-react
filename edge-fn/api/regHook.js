@@ -12,12 +12,12 @@ export default async (req) => {
           registration: 'ALLOW',
         },
       },
-      {
-        type: 'com.okta.user.profile.update',
-        value: {
-          address: '',
-        },
-      },
+      // {
+      //   type: 'com.okta.user.profile.update',
+      //   value: {
+      //     address: '',
+      //   },
+      // },
     ],
   };
 
