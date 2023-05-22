@@ -58,7 +58,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
   // Regular logout
   const logout = async () => {
     try {
-      await oktaAuth.signOut({ postLogoutRedirectUri: url });
+      await oktaAuth.signOut({ postLogoutRedirectUri: "/" });
     } catch (err) {
       if (isCorsError(err)) {
         setCorsErrorModalOpen(true);
