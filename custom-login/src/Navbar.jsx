@@ -115,6 +115,11 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     }
   };
 
+  const redirectToZendesk = () => {
+    window.location.href =
+      'https://okta.mark-vong.com/home/zendesk/0oa24rmv912Lj3Zuc697/238';
+  };
+
   return (
     <div>
       <Menu inverted id="menu">
@@ -160,6 +165,9 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
                 Logout
               </Menu.Item>
             )}
+            {/* <Menu.Item id="zendesk" onClick={redirectToZendesk}>
+              Zendesk
+            </Menu.Item> */}
             {/* {!authState.isPending && !authState.isAuthenticated && (
               <Menu.Item>
                 <Dropdown text="Region">
