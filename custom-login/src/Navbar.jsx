@@ -37,6 +37,10 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
     history.push('/login');
   };
 
+  const loginWithNB = async () => {
+    window.location.href = 'https://nationbuilder.mark-vong.com'
+  }
+
   // For hub spoke - region
   // const logout = async () => {
   //   const basename =
@@ -183,6 +187,9 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
             )}
             {!authState.isPending && !authState.isAuthenticated && (
               <Menu.Item onClick={loginLocally}>Login</Menu.Item>
+            )}
+            {!authState.isPending && !authState.isAuthenticated && (
+              <Menu.Item onClick={loginWithNB}>Log into NationBuilder</Menu.Item>
             )}
           </div>
         </Container>
