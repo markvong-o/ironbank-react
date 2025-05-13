@@ -2,7 +2,7 @@ const OktaJwtVerifier = require('@okta/jwt-verifier');
 import { allowCors } from './helpers/cors';
 
 const jwtVerifier = new OktaJwtVerifier({
-  issuer: 'https://okta.mark-vong.com/oauth2/ausqbble225O9UEc8696',
+  issuer: 'https://okta.mvbuilt.com/oauth2/ausqbble225O9UEc8696',
   assertClaims: {
     'scp.includes': ['read:balance'],
   },

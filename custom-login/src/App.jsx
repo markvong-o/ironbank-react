@@ -10,23 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 /*eslint-disable*/
-import React from 'react';
-import { Route, useHistory, Switch } from 'react-router-dom';
-import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
-import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
-import { Container } from 'semantic-ui-react';
-import config from './config';
-import Home from './views/Home';
-import CustomLoginComponent from './views/Login';
-import Messages from './Messages';
-import Navbar from './Navbar';
-import Profile from './views/Profile';
-import Applications from './views/Applications';
-import Api from './views/Api';
-import Admin from './views/Admin';
-import CorsErrorModal from './CorsErrorModal';
-import AuthRequiredModal from './AuthRequiredModal';
-import './App.css';
+import React from "react";
+import { Route, useHistory, Switch } from "react-router-dom";
+import { OktaAuth, toRelativeUrl } from "@okta/okta-auth-js";
+import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
+import { Container } from "semantic-ui-react";
+import config from "./config";
+import Home from "./views/Home";
+import CustomLoginComponent from "./views/Login";
+import Messages from "./Messages";
+import Navbar from "./Navbar";
+import Profile from "./views/Profile";
+import Applications from "./views/Applications";
+import Api from "./views/Api";
+import Admin from "./views/Admin";
+import M2M from "./views/M2M";
+import CorsErrorModal from "./CorsErrorModal";
+import AuthRequiredModal from "./AuthRequiredModal";
+import "./App.css";
 
 const oktaAuth = new OktaAuth(config.oidc);
 
@@ -44,7 +45,7 @@ const App = () => {
   };
 
   const restoreOriginalUri = async (_oktaAuth, originalUri) => {
-    history.replace(toRelativeUrl(originalUri || '/', window.location.origin));
+    history.replace(toRelativeUrl(originalUri || "/", window.location.origin));
   };
 
   // Check if Okta session exists, set tokens if it does
@@ -70,7 +71,7 @@ const App = () => {
   };
 
   const onAuthResume = async () => {
-    history.push('/');
+    history.push("/");
   };
 
   return (
@@ -88,7 +89,7 @@ const App = () => {
         <Container id="main-container">
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/api/login" component = {triggerLogin} />
+            <Route path="/api/login" component={triggerLogin} />
             <Route path="/login/callback" component={LoginCallback} />
             <Route
               path="/login"
@@ -101,6 +102,7 @@ const App = () => {
             <SecureRoute path="/apps" component={Applications} />
             <SecureRoute path="/balance" component={Api} />
             <SecureRoute path="/admin" component={Admin} />
+            <SecureRoute path="/m2m" component={M2M} />
           </Switch>
         </Container>
       </div>
