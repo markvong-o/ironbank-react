@@ -9,9 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@okta/jwt-verifier": "^3.0.1",
+    "@okta/jwt-verifier": "3.2.2",
     "@okta/okta-sdk-nodejs": "^7.1.1",
     "node-fetch": "^2.6.1",
+    "qs": "^6.14.0",
     "ts-node": "^10.9.1"
   }
 }

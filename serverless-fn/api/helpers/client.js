@@ -11,6 +11,7 @@ const client = new okta.Client({
     "okta.clients.register",
     "okta.clients.manage",
     "okta.clients.read",
+    "okta.apps.manage"
   ],
   privateKey:
     "-----BEGIN PRIVATE KEY-----\n" +
