@@ -9,13 +9,13 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-router-dom": "5.3.0",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^3.0.1",
     "semantic-ui-css": "2.5.0",
     "semantic-ui-react": "2.1.5",
     "text-encoding": "0.7.0"
   },
   "scripts": {
-    "start": "cross-env PORT=8080 react-scripts start",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider PORT=8080 react-scripts start",
     "start:browser:none": "BROWSER=none yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",

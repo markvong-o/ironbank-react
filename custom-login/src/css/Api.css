@@ -19,9 +19,10 @@ button {
   width: max-content;
   margin-top: 0.5rem;
 }
-button:hover {
+button:hover:not([disabled]) {
   background-color: black;
   color: yellow;
+  cursor: pointer;
 }
 
 #main-api-container{
