@@ -43,6 +43,7 @@ async function dcr(req, res) {
       let app_create = await client.http.http(url, request);
       if (app_create.status === 201) {
         app_res = await app_create.json();
+        s = app_create.status
       }
     } catch (e) {
       res.status(e.status).send(e);
